@@ -9,6 +9,17 @@ namespace Heap
     {
         List<int> list = new List<int>();
 
+        public int left(int i) { return 2 * i + 1; }
+        public int right(int i) { return 2 * i + 2; }
+        public bool hasLeft(int i) { return left(i) < list.Count; }
+        public bool hasRight(int i) { return right(i) < list.Count; }
+        public void swap(int i, int j) 
+        {
+            int temp = list[i];
+            list[i] = list[j];
+            list[j] = temp;
+        }  
+
         public void Add(int value)
         {
             list.Add(value);
@@ -17,9 +28,7 @@ namespace Heap
             // Heap Order 구현
             while (list[last] < list[last / 2])
             {
-                int temp = list[last];
-                list[last] = list[last / 2];
-                list[last / 2] = temp;
+                swap(last, last / 2);
             }
         }
 
@@ -43,29 +52,7 @@ namespace Heap
             int index = 0;
             while(index < list.Count)
             {
-                int child1 = index * 2 + 1;
-                int child2 = index * 2 + 2;
-
-                if(child1 < child2)
-                {
-
-                }
-
-                // 자식 비교
-                if (list[child1] > list[child2])
-                {
-                    // 작은 자식이 부모와 비교
-                    if (list[index * 2 + 2] < list[index])
-                    {
-                        int temp = list[index*2 + 2];
-                        list[index* 2] = list[last*2 + 1];
-                        list[last*2+1] = temp;
-                    }
-                }
-
-                int temp = list[last];
-                list[last] = list[last / 2];
-                list[last / 2] = temp;
+                
             }
         }
 
