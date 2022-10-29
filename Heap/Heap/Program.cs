@@ -9,11 +9,13 @@ namespace Heap
     {
         List<int> list = new List<int>();
 
-        public int left(int i) { return 2 * i + 1; }
-        public int right(int i) { return 2 * i + 2; }
-        public bool hasLeft(int i) { return left(i) < list.Count; }
-        public bool hasRight(int i) { return right(i) < list.Count; }
-        public void swap(int i, int j) 
+        public int Left(int i) { return 2 * i + 1; }
+        public int Right(int i) { return 2 * i + 2; }
+        public int Parent(int i) { return i / 2; }
+        public int Last() { return list.Count - 1; }
+        public bool HasLeft(int i) { return Left(i) < list.Count; }
+        public bool HasRight(int i) { return Right(i) < list.Count; }
+        public void Swap(int i, int j) 
         {
             int temp = list[i];
             list[i] = list[j];
@@ -23,12 +25,20 @@ namespace Heap
         public void Add(int value)
         {
             list.Add(value);
-            int last = list.Count - 1;
 
             // Heap Order 구현
-            while (list[last] < list[last / 2])
+            int index = Last();
+            while(Parent(index) > 0)
             {
-                swap(last, last / 2);
+                if (list[Parent(index)] > list[index])
+                {
+                    Swap(Parent(index), index);
+                    index = Parent(index);
+                }
+                else
+                {
+                    break;
+                }
             }
         }
 
@@ -44,15 +54,34 @@ namespace Heap
 
         public void Remove()
         {
-            int last = list.Count - 1;
+            int last = Last();
             list[0] = list[last];
             list.RemoveAt(last);
 
             // Heap Order 구현
             int index = 0;
-            while(index < list.Count)
+            while(HasLeft(index))
             {
-                
+                int lessChild = 0;
+                if (list[index] > list[Left(index)])
+                {
+                    lessChild = Left(index);
+                }
+
+                if (HasRight(index) && (list[Left(index)] > list[Right(index)]))
+                {
+                    lessChild = Right(index);
+                }
+
+                if(lessChild != 0)
+                {
+                    Swap(index, lessChild);
+                    index = lessChild;
+                }
+                else
+                {
+                    break;
+                }
             }
         }
 
