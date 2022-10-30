@@ -28,7 +28,7 @@ namespace Heap
 
             // Heap Order 구현
             int index = Last();
-            while(Parent(index) > 0)
+            while(Parent(index) >= 0)
             {
                 if (list[Parent(index)] > list[index])
                 {
@@ -62,7 +62,7 @@ namespace Heap
             int index = 0;
             while(HasLeft(index))
             {
-                int lessChild = 0;
+                int lessChild = -1;
                 if (list[index] > list[Left(index)])
                 {
                     lessChild = Left(index);
@@ -73,7 +73,7 @@ namespace Heap
                     lessChild = Right(index);
                 }
 
-                if(lessChild != 0)
+                if(lessChild != -1)
                 {
                     Swap(index, lessChild);
                     index = lessChild;
@@ -109,6 +109,7 @@ namespace Heap
             heap.Add(3);
             heap.Add(13);
             heap.Add(7);
+            heap.Add(-1);
             heap.Print();
 
             Console.WriteLine("=========Remove ===========");
