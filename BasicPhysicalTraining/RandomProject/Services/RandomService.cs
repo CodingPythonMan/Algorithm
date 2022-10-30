@@ -8,14 +8,16 @@ namespace RandomProject.Services
 {
     public class RandomService
     {
+        Random random = new();
+
         public void Start()
         {
             //UpAndDown();
+            Gugudan();
         }
 
         void UpAndDown()
         {
-            Random random = new();
             int goal = random.Next(0, 101);
 
             while(true)
@@ -41,6 +43,17 @@ namespace RandomProject.Services
                     Console.WriteLine("정답입니다.");
                     break;
                 }
+            }
+        }
+        
+        void Gugudan()
+        {
+            int dan = random.Next(2, 10);
+            int d = random.Next(2, 10);
+
+            for(int i=0; i<3; i++)
+            {
+
             }
         }
     }
