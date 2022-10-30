@@ -13,7 +13,7 @@ namespace RandomProject.Services
         public void Start()
         {
             //UpAndDown();
-            Gugudan();
+            //Gugudan();
         }
 
         void UpAndDown()
@@ -48,13 +48,20 @@ namespace RandomProject.Services
         
         void Gugudan()
         {
-            int dan = random.Next(2, 10);
-            int d = random.Next(2, 10);
-
             for(int i=0; i<3; i++)
             {
+                int dan = random.Next(2, 10);
+                int num = random.Next(2, 10);
 
+                Console.Write("{0} x {1} = ",dan, num);
+                int goal = int.Parse(Console.ReadLine()!);
+
+                if(goal != dan * num)
+                {
+                    return;
+                }
             }
+            Console.WriteLine("모두 정답입니다! 수고하셨습니다.");
         }
     }
 }

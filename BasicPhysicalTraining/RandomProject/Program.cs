@@ -1,5 +1,9 @@
 ﻿using RandomProject.Services;
 
-RandomService randomService = new();
+//RandomService randomService = new();
+//ArrayService arrayService = new();
+DimensionalService dimenService = new();
 
-randomService.Start();
+//randomService.Start();
+//arrayService.Start();
+dimenService.Start();
