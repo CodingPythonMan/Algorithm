@@ -11,19 +11,47 @@ namespace RandomProject.Services
         Random random = new();
         public void Start()
         {
-            fourfour();
+            //setRandomArray();
+            setZeroToSix();
         }
 
-        public void fourfour()
+        public void setRandomArray()
         {
             int[,] array = new int[4, 4];
-            for(int i=0; i<array.Length; i++)
+            for (int i = 0; i < array.GetLength(0); i++)
             {
-                for(int j=0; j < array.Length; j++)
+                for (int j = 0; j < array.GetLength(1); j++)
                 {
-                    Console.WriteLine("{0}, {1}", i, j);
                     array[i, j] = random.Next(1, 11);
-                    Console.Write("{0} ", array[i ,j]);
+                    Console.Write("{0} ", array[i, j]);
+                }
+                Console.WriteLine();
+            }
+        }
+
+        public void setZeroToSix()
+        {
+            int[,] array = new int[4, 4];
+            List<int> list = new List<int>();
+
+            while(list.Count < 10)
+            {
+                int num = random.Next(0, 16);
+                if (!list.Contains(num))
+                {
+                    list.Add(num);
+
+                    int row = num / 4;
+                    int col = num % 4;
+                    array[row, col] = random.Next(1, 11);
+                }
+            }
+
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    Console.Write("{0} ", array[i, j]);
                 }
                 Console.WriteLine();
             }
