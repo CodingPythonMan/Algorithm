@@ -32,19 +32,26 @@ namespace RandomProject.Services
         public void setZeroToSix()
         {
             int[,] array = new int[4, 4];
-            List<int> list = new List<int>();
+            int[] deck = new int[16];
 
-            while(list.Count < 10)
+            for (int i = 0; i < deck.Length; i++)
             {
-                int num = random.Next(0, 16);
-                if (!list.Contains(num))
-                {
-                    list.Add(num);
+                deck[i] = i;
+            }
 
-                    int row = num / 4;
-                    int col = num % 4;
-                    array[row, col] = random.Next(1, 11);
+            shuffle(deck);
+
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    array[i, j] = random.Next(1, 11);
                 }
+            }
+
+            for (int i = 0; i <deck.Length; i++)
+            {
+                array[deck[i]] = 0;
             }
 
             for (int i = 0; i < array.GetLength(0); i++)
@@ -54,6 +61,19 @@ namespace RandomProject.Services
                     Console.Write("{0} ", array[i, j]);
                 }
                 Console.WriteLine();
+            }
+        }
+
+        public void shuffle(int[] deck)
+        {
+            for (int i = 0; i < deck.Length; i++)
+            {
+                int rand = random.Next(0, 100);
+                int rand2 = random.Next(0, 100);
+
+                int temp = deck[rand];
+                deck[rand] = deck[rand2];
+                deck[rand2] = temp;
             }
         }
     }

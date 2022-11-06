@@ -34,16 +34,36 @@ namespace RandomProject.Services
         {
             Console.Write("몇 개 배열을 선언하시겠습니까?(1~100) : ");
             int num = int.Parse(Console.ReadLine()!);
-            int[] array = null!;
 
-            if(num > 0 || num < 101)
+            if (num < 0 || num > 100)
             {
-                array = new int[num];
+                return;
             }
 
-            for(int i=0; i < array.Length; i++)
+            int[] deck = new int[100];
+            for(int i=0; i<deck.Length; i++)
             {
-                array[i] = random.Next(1, 101);
+                deck[i] = i;
+            }
+
+            shuffle(deck);
+
+            for(int i=0; i < num; i++)
+            {
+                Console.WriteLine("array[{0}] : {1}", i, deck[i]);
+            }
+        }
+
+        public void shuffle(int[] deck)
+        {
+            for(int i=0; i<deck.Length; i++)
+            {
+                int rand = random.Next(0, 100);
+                int rand2 = random.Next(0, 100);
+
+                int temp = deck[rand];
+                deck[rand] = deck[rand2];
+                deck[rand2] = temp;
             }
         }
     }
