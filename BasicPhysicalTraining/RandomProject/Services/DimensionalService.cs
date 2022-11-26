@@ -52,10 +52,7 @@ namespace RandomProject.Services
             {
                 for (int j = 0; j < array.GetLength(1); j++)
                 {
-                    if (zeroCount >= 6)
-                    {
-                        Console.Write("{0} ", array[i, j]);
-                    }
+                    Console.Write("{0} ", array[i, j]);
                 }
                 Console.WriteLine();
             }
