@@ -30,4 +30,5 @@ static void Main()
     Console.WriteLine(heap.Min());
 }
 ```
-- Map 구현 <br>
+- Basic Physical Training <br>
+기본 문제를 풀어보는 시간을 가졌습니다.
