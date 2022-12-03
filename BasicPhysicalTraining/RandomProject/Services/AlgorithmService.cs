@@ -50,19 +50,43 @@ namespace RandomProject.Services
 
         public int solution(int[] music)
         {
+            HashSet<int> black = new() { 2,4,6,9,11 };
+            HashSet<int> white = new() { 1,3,5,7,8,10,12 };
+
             int result = 0;
-
-            HashSet<int> blackSet = new() {2,4,6,9,11 };
-            HashSet<int> whiteSet = new() {1,3,5,7,8,10,12 };
-
-            // 검은색...인지 흰색인지?
-
+            int pos = 1;
 
             for(int i=0; i<music.Length; i++)
             {
-                                
-            }
+                int target = music[i];
+                int begin = 0;
+                int end = 0;
 
+                if(pos < target)
+                {
+                    begin = pos;
+                    end = target;
+                }
+                else
+                {
+                    begin = target;
+                    end = pos;
+                }
+
+                for(int j = begin+1; j <= end; j++)
+                {
+                    if (white.Contains(j) is true)
+                    {
+                        result++;
+                    }
+                    else if(j == end)
+                    {
+                        result++;
+                    }
+                }
+                pos = target;
+            }
+            
             return result;
         }
     }

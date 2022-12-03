@@ -22,5 +22,9 @@ Console.WriteLine(result2);
 Console.WriteLine(result3);
 Console.WriteLine(result4);W*/
 
-int[] music = new int[] { 10, 9, 4, 5, 12 };
-algorithmService.solution(music);
+/* 알고리즘 NC 2번 문제
+ * int[] music = new int[] { 10, 9, 4, 5, 12 };
+int[] music2 = new int[] { 6, 4, 2, 11 };
+Console.WriteLine(algorithmService.solution(music));
+Console.WriteLine(algorithmService.solution(music2));*/
+
