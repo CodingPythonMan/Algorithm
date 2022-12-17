@@ -7,22 +7,14 @@ using System.Threading.Tasks;
 
 namespace RandomProject.Structure.Map
 {
-    public class Entry
-    {
-        public int key;
-        public int value;
-
-        public Entry() { }
-        public Entry(int key, int value) { this.key = key; this.value = value; }
-    }
-
     public class ChainHashMap
     {
+        protected int n;
         protected int capacity;
         private long scale, shift;
         private int prime;
 
-        List<List<Entry>> table = new();
+        UnsortedTableMap[] table = null!;
 
         public ChainHashMap(int cap, int p)
         {
@@ -31,52 +23,75 @@ namespace RandomProject.Structure.Map
             Random rand = new Random();
             scale = rand.Next(1, prime-1) + 1;
             shift = rand.Next(1, prime);
+            CreateTable();
         }
+
         public ChainHashMap(int cap) : this(cap, 109345121) { }
         public ChainHashMap() : this(17){}
 
-        public int? Get(int key)
+        public void CreateTable()
         {
-            return EntryGet(Hash(key));
+            table = new UnsortedTableMap[capacity];
         }
 
-        public int? EntryGet(int key)
+        public int? Get(int key)
         {
-            Entry entry = table[key][key];
-            if(entry == null)
+            return EntryGet(Hash(key), key);
+        }
+
+        public int? EntryGet(int hash, int key)
+        {
+            UnsortedTableMap bucket = table[hash];
+            if(bucket is null)
             {
                 return null;
             }
             else
             {
-                return entry.value;
+                return bucket.Get(key);
             }
         }
 
-        public void Put(int key, int value)
+        public int Put(int key, int value)
         {
-            //table.Add(new Entry(Hash(key), value));
-            BucketPut(key, value);   
+            int answer = BucketPut(Hash(key), key, value);   
+            if(n > capacity / 2)
+            {
+                Resize(2 * capacity - 1);
+            }
+            return answer;
         }
 
-        public void BucketPut(int key, int value)
+        public int BucketPut(int hash, int key, int value)
         {
-            List<Entry> bucket = table[Hash(key)];
+            UnsortedTableMap bucket = table[hash];
             if(bucket == null)
             {
-                table[key] = bucket = new List<Entry>();
+                table[key] = bucket = new UnsortedTableMap();
             }
-            int oldSize = bucket.Count;
-            // key 가 중복되면 Overwrite 하는 방법...
-            // 그건 기존에 배열에 값을 넣으면 Overwrite 가 
-            // 됐었다... 
-            
-            bucket.Add(new Entry(key, value));
+            int oldSize = bucket.Size();
+            int answer = bucket.Put(key, value);
+            n += (bucket.Size() - oldSize);
+
+            return answer;
         }
 
-        public void Remove(int key)
+        public int Remove(int key)
         {
+            return BucketRemove(Hash(key), key);
+        }
 
+        public int BucketRemove(int hash, int key)
+        {
+            UnsortedTableMap bucket = table[hash];
+            if(bucket is null)
+            {
+                return 0;
+            }
+            int oldSize = bucket.Size();
+            int answer = bucket.Remove(key);
+            n -= (oldSize - bucket.Size());
+            return answer;
         }
 
         public int Hash(int key)
@@ -87,12 +102,21 @@ namespace RandomProject.Structure.Map
    
         public bool Contains(int key)
         {
-
+            if(Get(key) is null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
-        public int Size()
+        public int Size() { return n; }
+
+        private void Resize(int newCapacity)
         {
-            return table.Count;
+            capacity = newCapacity;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using RandomProject.Services;
+using RandomProject.Services.Structure;
 
 //RandomService randomService = new();
 //ArrayService arrayService = new();
@@ -28,3 +29,5 @@ int[] music2 = new int[] { 6, 4, 2, 11 };
 Console.WriteLine(algorithmService.solution(music));
 Console.WriteLine(algorithmService.solution(music2));*/
 
+MapService mapService = new();
+mapService.Start();
