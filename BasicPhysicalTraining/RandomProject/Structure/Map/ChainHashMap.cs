@@ -5,7 +5,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RandomProject.Structure
+namespace RandomProject.Structure.Map
 {
     public class Entry
     {
