@@ -21,8 +21,8 @@ namespace RandomProject.Structure.Map
             prime = p;
             capacity = cap;
             Random rand = new Random();
-            scale = rand.Next(1, prime-1) + 1;
-            shift = rand.Next(1, prime);
+            scale = rand.Next(0, prime-1) + 1;
+            shift = rand.Next(0, prime);
             CreateTable();
         }
 
@@ -67,7 +67,8 @@ namespace RandomProject.Structure.Map
             UnsortedTableMap bucket = table[hash];
             if(bucket == null)
             {
-                table[key] = bucket = new UnsortedTableMap();
+                // table[key] = bucket = new UnsortedTableMap
+                bucket = table[hash] = new UnsortedTableMap();
             }
             int oldSize = bucket.Size();
             int answer = bucket.Put(key, value);

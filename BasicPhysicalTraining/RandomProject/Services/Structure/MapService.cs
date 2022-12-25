@@ -13,9 +13,11 @@ namespace RandomProject.Services.Structure
         {
             ChainHashMap chainHashMap = new ChainHashMap();
             chainHashMap.Put(1, 3);
-            chainHashMap.Put(2, 3);
-            chainHashMap.Put(3, 3);
-            chainHashMap.Put(4, 3);
+            chainHashMap.Put(2, 5);
+            chainHashMap.Put(3, 10);
+            chainHashMap.Put(4, 7);
+            Console.WriteLine(chainHashMap.Get(3));
+            chainHashMap.Remove(3);
 
             Console.WriteLine(chainHashMap.Contains(3));
             Console.WriteLine(chainHashMap.Contains(6));
