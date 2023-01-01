@@ -48,6 +48,7 @@ namespace RandomProject.Services
             return result;
         }*/
 
+        
         public int solution(int[] music)
         {
             HashSet<int> black = new() { 2,4,6,9,11 };
