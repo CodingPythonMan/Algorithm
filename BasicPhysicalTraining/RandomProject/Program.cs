@@ -4,7 +4,7 @@ using RandomProject.Services.Structure;
 //RandomService randomService = new();
 //ArrayService arrayService = new();
 //DimensionalService dimenService = new();
-AlgorithmService algorithmService = new();
+//AlgorithmService algorithmService = new();
 
 //randomService.Start();
 //arrayService.Start();
@@ -29,5 +29,8 @@ int[] music2 = new int[] { 6, 4, 2, 11 };
 Console.WriteLine(algorithmService.solution(music));
 Console.WriteLine(algorithmService.solution(music2));*/
 
-MapService mapService = new();
-mapService.Start();
+//MapService mapService = new();
+//mapService.Start();
+
+RecursiveService recursiveService = new RecursiveService();
+recursiveService.Start();
