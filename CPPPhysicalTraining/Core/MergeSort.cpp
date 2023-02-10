@@ -1,11 +1,39 @@
 #include "pch.h"
 #include "MergeSort.h"
 
-void MergeSort::Sort(vector<int> arr)
+MergeSort::~MergeSort()
 {
-	// 분할 해야 한다...
-	int left = 0;
-	int right = arr.size();
+}
 
-	// 2개 이하 일 때까지 분할하고, 
+void MergeSort::Sort(vector<int>& arr)
+{
+	_arr = arr;
+
+	int left = 0;
+	int right = static_cast<int>(_arr.size());
+
+	Divide(left, right);
+}
+
+void MergeSort::Merge(int left, int mid, int right)
+{
+
+}
+
+void MergeSort::Divide(int left, int right)
+{
+	if (left < right)
+	{
+		int mid = (left + right) / 2;
+		Divide(left, mid);
+		Divide(mid, right);
+		Merge(left, mid, right);
+	}
+}
+
+void MergeSort::Swap(int x, int y)
+{
+	int temp = _arr[x];
+	_arr[x] = _arr[y];
+	_arr[y] = temp;
 }

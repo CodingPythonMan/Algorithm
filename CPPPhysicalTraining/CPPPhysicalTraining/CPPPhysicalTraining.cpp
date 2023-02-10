@@ -12,7 +12,7 @@ int main()
 {
     vector<int> arr = {3,6,1,2,5,4};
 
-    MergeSort mergeSort;
+	MergeSort mergeSort;
     mergeSort.Sort(arr);
 
     Print(arr);
