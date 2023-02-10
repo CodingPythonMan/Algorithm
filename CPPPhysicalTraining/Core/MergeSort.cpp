@@ -1,7 +1,11 @@
 #include "pch.h"
 #include "MergeSort.h"
 
-void MergeSort::Print()
+void MergeSort::Sort(vector<int> arr)
 {
-	cout << "아아 이게 들리나?";
+	// 분할 해야 한다...
+	int left = 0;
+	int right = arr.size();
+
+	// 2개 이하 일 때까지 분할하고, 
 }

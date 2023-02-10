@@ -3,5 +3,5 @@
 class MergeSort
 {
 public:
-	void Print();
+	void Sort(vector<int> arr);
 };
