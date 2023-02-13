@@ -17,8 +17,11 @@ int main()
 	for (int i = 0; i < 1000; i++)
 		arr.push_back(rand());
 
-	MergeSort mergeSort;
-    mergeSort.Sort(arr);
+	//MergeSort mergeSort;
+    //mergeSort.Sort(arr);
+	
+	QuickSort quickSort;
+	quickSort.Sort(arr);
 
     Print(arr);
 }

@@ -18,6 +18,9 @@
     <ClCompile Include="MergeSort.cpp">
       <Filter>Algorithm</Filter>
     </ClCompile>
+    <ClCompile Include="QuickSort.cpp">
+      <Filter>Algorithm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -27,6 +30,9 @@
       <Filter>Main</Filter>
     </ClInclude>
     <ClInclude Include="MergeSort.h">
+      <Filter>Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="QuickSort.h">
       <Filter>Algorithm</Filter>
     </ClInclude>
   </ItemGroup>

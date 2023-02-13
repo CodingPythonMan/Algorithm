@@ -6,3 +6,4 @@
 using namespace std;
 
 #include "MergeSort.h"
+#include "QuickSort.h"
