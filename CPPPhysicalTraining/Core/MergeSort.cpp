@@ -7,33 +7,36 @@ MergeSort::~MergeSort()
 
 void MergeSort::Sort(vector<int>& arr)
 {
-	_arr = arr;
+	int n = static_cast<int>(arr.size());
+	if (n <= 1)
+		return;
 
-	int left = 0;
-	int right = static_cast<int>(_arr.size());
+	vector<int> v1, v2;
+	auto p = arr.begin();
 
-	Divide(left, right);
+	for (int i = 0; i < n / 2; i++)
+		v1.push_back(*p++);
+	for (int i = n / 2; i < n; i++)
+		v2.push_back(*p++);
+	arr.clear();
+	Sort(v1);
+	Sort(v2);
+	Merge(v1, v2, arr);
 }
 
-void MergeSort::Merge(int left, int mid, int right)
+void MergeSort::Merge(vector<int>& v1, vector<int>& v2, vector<int>& arr)
 {
-
-}
-
-void MergeSort::Divide(int left, int right)
-{
-	if (left < right)
+	auto p1 = v1.begin();
+	auto p2 = v2.begin();
+	while (p1 != v1.end() && p2 != v2.end())
 	{
-		int mid = (left + right) / 2;
-		Divide(left, mid);
-		Divide(mid, right);
-		Merge(left, mid, right);
+		if (*p1 < *p2)
+			arr.push_back(*p1++);
+		else
+			arr.push_back(*p2++);
 	}
-}
-
-void MergeSort::Swap(int x, int y)
-{
-	int temp = _arr[x];
-	_arr[x] = _arr[y];
-	_arr[y] = temp;
+	while (p1 != v1.end())
+		arr.push_back(*p1++);
+	while (p2 != v2.end())
+		arr.push_back(*p2++);
 }
