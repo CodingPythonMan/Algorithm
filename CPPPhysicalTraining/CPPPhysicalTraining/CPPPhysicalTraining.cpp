@@ -1,6 +1,7 @@
 #include "pch.h"
 #include <cstdlib>
 #include <ctime>
+//#include <algorithm>
 
 void Print(const vector<int>& arr)
 {
@@ -12,28 +13,27 @@ void Print(const vector<int>& arr)
 
 int main()
 {
+	//ios_base::sync_with_stdio(false);
+	//cin.tie(nullptr);
+	//cout.tie(nullptr);
+
 	int n, a = 0;
     vector<int> arr;
 
 	cin >> n;
+	arr.resize(n);
 	for (int i = 0; i < n; i++)
 	{
-		//cin >> a;
-		//arr.push_back(a);
-		arr.push_back(rand());
+		arr[i] = rand();
 	}
-
-	//for (int i = 0; i < 1000000; i++)
-		//arr.push_back(rand());
-
-	//Print(arr);
-	//cout << endl;
 
 	MergeSort mergeSort;
     mergeSort.Sort(arr);
 	
 	//QuickSort quickSort;
 	//quickSort.Sort(arr);
+
+	//sort(arr.begin(), arr.end());
 
     Print(arr);
 }
