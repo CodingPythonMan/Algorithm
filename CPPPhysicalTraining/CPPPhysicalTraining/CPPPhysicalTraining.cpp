@@ -18,5 +18,9 @@ int main()
 	//cin.tie(nullptr);
 	//cout.tie(nullptr);
 
-	
+	vector<int> arr = { 13, 40, 2, 100, 10 };
+
+	RadixSort radix;
+	radix.Sort(arr);
+	Print(arr);
 }
