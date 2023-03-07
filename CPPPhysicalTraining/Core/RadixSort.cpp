@@ -31,9 +31,9 @@ void RadixSort::CountSortWithDigit(vector<int>& arr, int digit)
 	}
 
 	// 현재 자릿수를 기준으로 정렬
-	for (int i = arr.size() - 1; i > -1; i--)
+	for (int i = static_cast<int>(arr.size()) - 1; i > -1; i--)
 	{
-		arr2[arr3[GetDigit(arr[i], digit)] - 1] = arr[i];
+		arr2[arr3[GetDigit(arr[i], digit)]-1] = arr[i];
 		arr3[GetDigit(arr[i], digit)] -= 1;
 	}
 
