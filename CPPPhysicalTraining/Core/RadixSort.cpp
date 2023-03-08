@@ -53,7 +53,7 @@ void RadixSort::Sort(vector<int>& arr)
 
 	int digit = static_cast<int>(log10(max) + 1);
 
-	for (int i = 1; i <= digit; i++)
+	for (int i = 0; i < digit; i++)
 	{
 		CountSortWithDigit(arr, i);
 	}
