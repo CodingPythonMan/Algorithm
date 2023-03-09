@@ -17,11 +17,9 @@ int main()
 	//ios_base::sync_with_stdio(false);
 	//cin.tie(nullptr);
 	//cout.tie(nullptr);
+	vector<vector<int>> times;
+	int n = 4;
+	int k = 2;
 
-	vector<int> arr2 = { 13, 40, 2, 100, 10 };
-	vector<int>& arr = arr2;
-
-	RadixSort radix;
-	radix.Sort(arr);
-	Print(arr);
+	//times = [[2, 1, 1], [2, 3, 1], [3, 4, 1]]
 }

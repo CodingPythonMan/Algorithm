@@ -7,6 +7,9 @@
     <Filter Include="Algorithm">
       <UniqueIdentifier>{485ec741-ba8f-4618-bcc1-0c498dcec502}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LeetCode">
+      <UniqueIdentifier>{9b574704-cf14-4fff-bed3-874ed027658f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -24,6 +27,9 @@
     <ClCompile Include="RadixSort.cpp">
       <Filter>Algorithm</Filter>
     </ClCompile>
+    <ClCompile Include="DelayNetwork.cpp">
+      <Filter>LeetCode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -40,6 +46,9 @@
     </ClInclude>
     <ClInclude Include="RadixSort.h">
       <Filter>Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="DelayNetwork.h">
+      <Filter>LeetCode</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
