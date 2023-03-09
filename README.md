@@ -8,8 +8,12 @@ Heap Order 구현했으므로 Add 한 첫 부분부터 잘 배열된게 보임<b
 
 - C++ 용으로 하나 프로젝트 더 파기
 
-- 재귀 문제 풀기
+- DFS <br>
+이걸 재귀 또는 스택으로 풀 수 있는 이유는 함수 호출들을 콜 스택이라 불리듯이 재귀가 곧 스택이기 때문이다.
 
 ## Advanced Algorithm
 - Counting Sort, Radix Sort <br>
 기수 정렬이라는 말은 들어보았으나 실제로 구현해서 문제푸는 것은 처음
+
+## Example
+- [LeetCode Network Delay](https://leetcode.com/problems/network-delay-time/)

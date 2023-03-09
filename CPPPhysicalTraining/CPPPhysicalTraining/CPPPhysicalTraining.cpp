@@ -18,28 +18,10 @@ int main()
 	//cin.tie(nullptr);
 	//cout.tie(nullptr);
 
-	vector<int> arr = { 13, 40, 2, 100, 10 };
+	vector<int> arr2 = { 13, 40, 2, 100, 10 };
+	vector<int>& arr = arr2;
 
 	RadixSort radix;
 	radix.Sort(arr);
 	Print(arr);
-
-	int min = 0;
-	if (arr.size() > 0)
-	{
-		min = arr[1] - arr[0];
-		for (int i = 2; i < arr.size(); i++)
-		{
-			int diff = arr[i] - arr[i - 1];
-			if (min > diff)
-			{
-				min = diff;
-			}
-		}
-	}
-	else
-	{
-		min = 0;
-	}
-	cout << "ÃÖ¼Ò : " << min << endl;
 }
