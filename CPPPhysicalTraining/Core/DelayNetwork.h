@@ -5,9 +5,9 @@ public:
 	vector<bool> visit;
 	vector<vector<int>> linkList;
 	vector<vector<int>> weightList;
-	int max = 0;
+	vector<int> distances;
 
 	int networkDelayTime(vector<vector<int>>& times, int n, int k);
-	void Explorer(const vector<int>& links, const vector<int>& weights, int weight);
+	void Explorer(const int start, int weight);
 };
 
