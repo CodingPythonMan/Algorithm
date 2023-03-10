@@ -32,6 +32,10 @@ void DelayNetwork::Explorer(const vector<int>& links, const vector<int>& weights
 	for (int i=0; i<links.size(); i++)
 	{
 		int index = links[i];
+		if (visit[index] == true)
+		{
+			continue;
+		}
 		visit[index] = true;
 		
 		if (max < weight + weights[i])
