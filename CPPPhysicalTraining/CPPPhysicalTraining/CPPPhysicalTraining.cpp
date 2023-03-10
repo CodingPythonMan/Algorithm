@@ -21,5 +21,11 @@ int main()
 	int n = 4;
 	int k = 2;
 
+	times.push_back({2,1,1});
+	times.push_back({2,3,1});
+	times.push_back({3,4,1});
+
+	DelayNetwork d;
+	cout << d.networkDelayTime(times, n, k) << endl;
 	//times = [[2, 1, 1], [2, 3, 1], [3, 4, 1]]
 }
