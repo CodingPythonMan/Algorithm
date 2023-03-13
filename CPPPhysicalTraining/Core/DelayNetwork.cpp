@@ -70,6 +70,7 @@ void DelayNetwork::Explorer(const int k, int weight)
 	if (pq.size() != 0)
 	{
 		const vector<int>& vertex = pq.top();
-		Explorer(vertex[0], weight + vertex[1]);
+		visit[vertex[0]] = true;
+		Explorer(vertex[0], vertex[1]);
 	}
 }
