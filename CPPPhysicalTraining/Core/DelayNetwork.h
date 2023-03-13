@@ -2,6 +2,7 @@
 class DelayNetwork
 {
 public:
+	vector<bool> visit;
 	vector<vector<int>> linkList;
 	vector<vector<int>> weightList;
 	vector<int> distances;

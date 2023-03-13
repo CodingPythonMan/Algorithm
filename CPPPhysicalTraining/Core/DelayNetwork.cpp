@@ -2,6 +2,7 @@
 #include "DelayNetwork.h"
 
 int DelayNetwork::networkDelayTime(vector<vector<int>>& times, int n, int k) {
+	visit.resize(n + 1);
 	distances.resize(n + 1);
 	linkList.resize(n + 1);
 	weightList.resize(n + 1);
@@ -15,6 +16,7 @@ int DelayNetwork::networkDelayTime(vector<vector<int>>& times, int n, int k) {
 		weightList[i[0]].push_back(i[2]);
 	}
 
+	visit[k] = true;
 	distances[k] = 0;
 
 	Explorer(k, 0);
@@ -51,6 +53,9 @@ void DelayNetwork::Explorer(const int k, int weight)
 	{
 		int index = links[i];
 
+		if (visit[index] == true)
+			continue;
+
 		if (distances[index] > weights[i] + weight)
 		{
 			distances[index] = weights[i] + weight;
@@ -69,6 +74,7 @@ void DelayNetwork::Explorer(const int k, int weight)
 			continue;
 		}
 
+		visit[vertex[0]] = true;
 		Explorer(vertex[0], weight + vertex[1]);
 		break;
 	}
