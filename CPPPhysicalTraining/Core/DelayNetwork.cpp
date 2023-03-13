@@ -3,7 +3,6 @@
 
 int DelayNetwork::networkDelayTime(vector<vector<int>>& times, int n, int k) {
 	distances.resize(n + 1);
-	visit.resize(n + 1);
 	linkList.resize(n + 1);
 	weightList.resize(n + 1);
 
@@ -16,22 +15,21 @@ int DelayNetwork::networkDelayTime(vector<vector<int>>& times, int n, int k) {
 		weightList[i[0]].push_back(i[2]);
 	}
 
-	visit[k] = true;
 	distances[k] = 0;
 
 	Explorer(k, 0);
 
-	int result = INT_MAX;
+	int result = 0;
 
-	for (int i : distances)
+	for (int i=1; i<n+1; i++)
 	{
-		if (i == INT_MAX)
+		if (distances[i] == INT_MAX)
 		{
 			result = -1;
 			break;
 		}
-		if (result > i)
-			result = i;
+		if (result < distances[i])
+			result = distances[i];
 	}
 
 	return result;
@@ -39,28 +37,39 @@ int DelayNetwork::networkDelayTime(vector<vector<int>>& times, int n, int k) {
 
 void DelayNetwork::Explorer(const int k, int weight)
 {
-	int minIndex = 0;
-	int min = INT_MAX;
 	const vector<int>& links = linkList[k];
 	const vector<int>& weights = weightList[k];
+
+	auto cmp = [](const vector<int>& v1, const vector<int>& v2)
+	{
+		return (v1[1] > v2[1]);
+	};
+
+	priority_queue<vector<int>, vector<vector<int>>, decltype(cmp)> pq(cmp);
 
 	for (int i=0; i<links.size(); i++)
 	{
 		int index = links[i];
 
-		if (distances[index] == INT_MAX)
-			distances[index] = weights[i];
-
-		if (visit[index] == false && distances[index] < min)
+		if (distances[index] > weights[i] + weight)
 		{
-			min = distances[index];
-			minIndex = i;
+			distances[index] = weights[i] + weight;
 		}
+
+		pq.push({ links[i],distances[index]});
 	}
 
-	if (minIndex != 0)
+	while (pq.size() != 0)
 	{
-		weight += weights[minIndex];
-		Explorer(minIndex, weight);
+		const vector<int>& vertex = pq.top();
+		
+		if (linkList[vertex[0]].empty())
+		{
+			pq.pop();
+			continue;
+		}
+
+		Explorer(vertex[0], weight + vertex[1]);
+		break;
 	}
 }
