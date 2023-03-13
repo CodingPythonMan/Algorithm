@@ -61,21 +61,15 @@ void DelayNetwork::Explorer(const int k, int weight)
 			distances[index] = weights[i] + weight;
 		}
 
-		pq.push({ links[i],distances[index]});
+		if (linkList[index].empty() == false)
+		{
+			pq.push({ index, distances[index]});
+		}
 	}
 
-	while (pq.size() != 0)
+	if (pq.size() != 0)
 	{
 		const vector<int>& vertex = pq.top();
-		
-		if (linkList[vertex[0]].empty())
-		{
-			pq.pop();
-			continue;
-		}
-
-		visit[vertex[0]] = true;
 		Explorer(vertex[0], weight + vertex[1]);
-		break;
 	}
 }
