@@ -70,15 +70,18 @@ int explorer(int param1, int param2, int n)
 	dijkstra({ param2, 0 });
 	result += distances[n];
 
+	if (visit[n] == false)
+		result = INT_MAX;
+
 	return result;
 }
 
 int main()
 {
 	int n, e, param1, param2;
-	n = 5;
-	e = 7;
-	param1 = 3;
+	n = 3;
+	e = 2;
+	param1 = 1;
 	param2 = 2;
 
 	linkList.resize(n + 1);
@@ -88,30 +91,15 @@ int main()
 	linkList[1].push_back({ 2,3 });
 	linkList[2].push_back({ 1,3 });
 
-	linkList[2].push_back({ 3,3 });
-	linkList[3].push_back({ 2,3 });
-
-	linkList[3].push_back({ 4,3 });
-	linkList[4].push_back({ 3,3 });
-
-	linkList[4].push_back({ 5,3 });
-	linkList[5].push_back({ 4,3 });
-
-	linkList[1].push_back({ 4,4 });
-	linkList[4].push_back({ 1,4 });
-
-	linkList[2].push_back({ 4,2 });
-	linkList[4].push_back({ 2,2 });
-
-	linkList[1].push_back({ 3,2 });
-	linkList[3].push_back({ 1,2 });
+	linkList[1].push_back({ 3,3 });
+	linkList[3].push_back({ 1,3 });
 
 	int result = explorer(param1, param2, n);
 	int result2 = explorer(param2, param1, n);
 
 	result = result < result2 ? result : result2;
 
-	if (visit[n] == true)
+	if (result != INT_MAX)
 		cout << result;
 	else
 		cout << -1;
