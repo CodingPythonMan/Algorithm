@@ -5,8 +5,8 @@
 using namespace std;
 
 struct vertex {
-	int n;
-	int w;
+	int index;
+	int weight;
 };
 
 vector<vector<vertex>> linkList;
@@ -22,12 +22,12 @@ void init(int n)
 		visit[i] = false;
 }
 
-void explorer(const int arrive, const int before)
+void dijkstra(const vertex& ver)
 {
-	const vector<vertex>& links = linkList[arrive];
+	const vector<vertex>& links = linkList[ver.index];
 
 	auto cmp = [](const vertex& v1, const vertex& v2) {
-		return (v1.w > v2.w);
+		return (v1.weight > v2.weight);
 	};
 
 	priority_queue < vertex, vector<vertex>, decltype(cmp)> pq(cmp);
@@ -35,15 +35,15 @@ void explorer(const int arrive, const int before)
 	for (int i = 0; i < links.size(); i++)
 	{
 		const vertex& v = links[i];
-		if (visit[v.n] == true)
+		if (visit[v.index] == true)
 			continue;
 
-		if (distances[v.n] > v.w + before)
-			distances[v.n] = v.w + before;
+		if (distances[v.index] > v.weight + ver.weight)
+			distances[v.index] = v.weight + ver.weight;
 
-		if (linkList[v.n].empty() == false)
+		if (linkList[v.index].empty() == false)
 		{
-			pq.push({ v.n, distances[v.n] });
+			pq.push({ v.index, distances[v.index] });
 		}
 			
 	}
@@ -51,20 +51,38 @@ void explorer(const int arrive, const int before)
 	if (pq.size() != 0)
 	{
 		const vertex& v = pq.top();
-		visit[v.n] = true;
-		explorer(v.n, v.w);
+		visit[v.index] = true;
+		dijkstra(v);
 	}
+}
+
+int explorer(int param1, int param2, int n)
+{
+	int result = 0;
+
+	init(n);
+	visit[1] = true;
+	distances[1] = 0;
+	dijkstra({ 1,0 });
+	result += distances[param1];
+	init(n);
+	dijkstra({ param1, 0 });
+	result += distances[param2];
+	init(n);
+	dijkstra({ param2, 0 });
+	result += distances[n];
+
+	return result;
 }
 
 int main()
 {
-	int n, e, param1, param2, result;
+	int n, e, param1, param2;
 	//cin >> n >> e;
 	n = 4;
 	e = 6;
 	param1 = 2;
 	param2 = 3;
-	result = 0;
 
 	linkList.resize(n + 1);
 	visit.resize(n + 1);
@@ -92,30 +110,10 @@ int main()
 	linkList[1].push_back({ 4,4 });
 	linkList[4].push_back({ 1,4 });
 
-	visit[1] = true;
-	distances[1] = 0;
-	explorer(1, 0);
+	int result = explorer(param1, param2, n);
+	int result2 = explorer(param2, param1, n);
 
-	if (distances[param1] < distances[param2])
-	{
-		result += distances[param1];
-		init(n);
-		explorer(param1, 0);
-		result += distances[param2];
-		init(n);
-		explorer(param2, 0);
-	}
-	else
-	{
-		result += distances[param2];
-		init(n);
-		explorer(param2, 0);
-		result += distances[param1];
-		init(n);
-		explorer(param1, 0);
-	}
-
-	result += distances[n];
+	result = result < result2 ? result : result2;
 
 	if (visit[n] == true)
 		cout << result;
