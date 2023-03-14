@@ -76,10 +76,10 @@ int explorer(int param1, int param2, int n)
 int main()
 {
 	int n, e, param1, param2;
-	n = 2;
-	e = 2;
-	param1 = 2;
-	param2 = 1;
+	n = 5;
+	e = 7;
+	param1 = 3;
+	param2 = 2;
 
 	linkList.resize(n + 1);
 	visit.resize(n + 1);
@@ -87,6 +87,24 @@ int main()
 
 	linkList[1].push_back({ 2,3 });
 	linkList[2].push_back({ 1,3 });
+
+	linkList[2].push_back({ 3,3 });
+	linkList[3].push_back({ 2,3 });
+
+	linkList[3].push_back({ 4,3 });
+	linkList[4].push_back({ 3,3 });
+
+	linkList[4].push_back({ 5,3 });
+	linkList[5].push_back({ 4,3 });
+
+	linkList[1].push_back({ 4,4 });
+	linkList[4].push_back({ 1,4 });
+
+	linkList[2].push_back({ 4,2 });
+	linkList[4].push_back({ 2,2 });
+
+	linkList[1].push_back({ 3,2 });
+	linkList[3].push_back({ 1,2 });
 
 	int result = explorer(param1, param2, n);
 	int result2 = explorer(param2, param1, n);
