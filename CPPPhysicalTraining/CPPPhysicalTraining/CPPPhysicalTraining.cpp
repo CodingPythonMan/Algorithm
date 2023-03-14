@@ -1,48 +1,38 @@
-#include <iostream>
+#include <climits>
 #include <vector>
 #include <queue>
-#include <climits>
+#include <iostream>
 using namespace std;
 
-struct vertex {
+struct node
+{
 	int index;
 	int weight;
 };
 
-vector<vector<vertex>> linkList;
+vector<vector<node>> linkList;
 vector<bool> visit;
 vector<int> distances;
 
-void init(int start, int n)
+void explorer(const node& vertex)
 {
-	for (int i = 1; i < n + 1; i++)
-		distances[i] = INT_MAX;
+	vector<node>& links = linkList[vertex.index];
 
-	for (int i = 1; i < n + 1; i++)
-		visit[i] = false;
-
-	visit[start] = true;
-	distances[start] = 0;
-}
-
-void dijkstra(const vertex& ver)
-{
-	const vector<vertex>& links = linkList[ver.index];
-
-	auto cmp = [](const vertex& v1, const vertex& v2) {
+	auto cmp = [](const node& v1, const node& v2) {
 		return (v1.weight > v2.weight);
 	};
 
-	priority_queue < vertex, vector<vertex>, decltype(cmp)> pq(cmp);
+	priority_queue<node, vector<node>, decltype(cmp)> pq(cmp);
 
-	for (int i = 0; i < links.size(); i++)
+	for (int i = 0; i < static_cast<int>(links.size()); i++)
 	{
-		const vertex& v = links[i];
+		const node& v = links[i];
+
 		if (visit[v.index] == true)
 			continue;
 
-		if (distances[v.index] > v.weight + ver.weight)
-			distances[v.index] = v.weight + ver.weight;
+		if (distances[v.index] > vertex.weight + v.weight)
+			distances[v.index] = vertex.weight + v.weight;
 
 		if (linkList[v.index].empty() == false)
 			pq.push({ v.index, distances[v.index] });
@@ -50,57 +40,46 @@ void dijkstra(const vertex& ver)
 
 	if (pq.size() != 0)
 	{
-		const vertex& v = pq.top();
+		const node& v = pq.top();
 		visit[v.index] = true;
-		dijkstra(v);
+		explorer(v);
 	}
-}
-
-int explorer(int param1, int param2, int n)
-{
-	int result = 0;
-
-	init(1, n);
-	dijkstra({ 1,0 });
-	result += distances[param1];
-	init(param1, n);
-	dijkstra({ param1, 0 });
-	result += distances[param2];
-	init(param2, n);
-	dijkstra({ param2, 0 });
-	result += distances[n];
-
-	if (visit[n] == false)
-		result = INT_MAX;
-
-	return result;
 }
 
 int main()
 {
-	int n, e, param1, param2;
-	n = 3;
-	e = 2;
-	param1 = 1;
-	param2 = 2;
+	int n, e;
+	cin >> n >> e;
 
-	linkList.resize(n + 1);
-	visit.resize(n + 1);
-	distances.resize(n + 1);
+	linkList.resize(n);
+	visit.resize(n);
+	distances.resize(n);
 
-	linkList[1].push_back({ 2,3 });
-	linkList[2].push_back({ 1,3 });
+	for (int i = 1; i < n; i++)
+		distances[i] = INT_MAX;
 
-	linkList[1].push_back({ 3,3 });
-	linkList[3].push_back({ 1,3 });
+	for (int i = 0; i < n; i++)
+	{
+		int visible;
+		cin >> visible;
+		if (visible == 1)
+			visit[i] = true;
+	}
+	visit[n - 1] = false;
 
-	int result = explorer(param1, param2, n);
-	int result2 = explorer(param2, param1, n);
+	for (int i = 0; i < e; i++)
+	{
+		int a, b, c;
+		cin >> a >> b >> c;
+		linkList[a].push_back({ b,c });
+		linkList[b].push_back({ a,c });
+	}
 
-	result = result < result2 ? result : result2;
+	visit[0] = true;
+	explorer({ 0,0 });
 
-	if (result != INT_MAX)
-		cout << result;
-	else
+	if (distances[n - 1] == INT_MAX)
 		cout << -1;
+	else
+		cout << distances[n - 1];
 }
