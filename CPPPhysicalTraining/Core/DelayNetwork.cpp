@@ -1,76 +1,65 @@
 #include "pch.h"
 #include "DelayNetwork.h"
 
-int DelayNetwork::networkDelayTime(vector<vector<int>>& times, int n, int k) {
-	visit.resize(n + 1);
+int DelayNetwork::networkDelayTime(vector<vector<int>>& times, int n, int k) 
+{
+	graph.resize(n + 1);
 	distances.resize(n + 1);
-	linkList.resize(n + 1);
-	weightList.resize(n + 1);
 
-	for (int i = 0; i < n + 1; i++)
+	for (int i = 1; i < n + 1; i++)
 		distances[i] = INT_MAX;
 
-	for (const vector<int>& i : times)
+	for (int i = 0; i < static_cast<int>(times.size()); i++)
 	{
-		linkList[i[0]].push_back(i[1]);
-		weightList[i[0]].push_back(i[2]);
+		const vector<int>& time = times[i];
+
+		graph[time[0]].push_back({ time[1], time[2] });
+		// 무방향성 일 때는 하나 더 추가
 	}
 
-	visit[k] = true;
-	distances[k] = 0;
-
-	Explorer(k, 0);
+	Explorer(k);
 
 	int result = 0;
-
-	for (int i=1; i<n+1; i++)
+	for (int i = 1; i < n + 1; i++)
 	{
 		if (distances[i] == INT_MAX)
 		{
 			result = -1;
 			break;
 		}
-		if (result < distances[i])
+
+		if(result < distances[i])
 			result = distances[i];
 	}
 
 	return result;
 }
 
-void DelayNetwork::Explorer(const int k, int weight)
+void DelayNetwork::Explorer(int start)
 {
-	const vector<int>& links = linkList[k];
-	const vector<int>& weights = weightList[k];
+	distances[start] = 0;
 
-	auto cmp = [](const vector<int>& v1, const vector<int>& v2)
-	{
-		return (v1[1] > v2[1]);
+	auto cmp = [](const pair<int, int>& p1, const pair<int, int>& p2) {
+		return (p1.second > p2.second);
 	};
 
-	priority_queue<vector<int>, vector<vector<int>>, decltype(cmp)> pq(cmp);
+	priority_queue<pair<int, int>, vector<pair<int, int>>, decltype(cmp)> pq(cmp);
+	pq.push({ start, 0 });
 
-	for (int i=0; i<links.size(); i++)
+	while (pq.size() != 0)
 	{
-		int index = links[i];
+		pair<int, int> node = pq.top();
+		pq.pop();
 
-		if (visit[index] == true)
-			continue;
+		if (node.second > distances[node.first]) continue;
 
-		if (distances[index] > weights[i] + weight)
+		for (auto& next : graph[node.first])
 		{
-			distances[index] = weights[i] + weight;
+			if (distances[next.first] > node.second + next.second)
+			{
+				distances[next.first] = node.second + next.second;
+				pq.push({ next.first, distances[next.first] });
+			}
 		}
-
-		if (linkList[index].empty() == false)
-		{
-			pq.push({ index, distances[index]});
-		}
-	}
-
-	if (pq.size() != 0)
-	{
-		const vector<int>& vertex = pq.top();
-		visit[vertex[0]] = true;
-		Explorer(vertex[0], vertex[1]);
 	}
 }

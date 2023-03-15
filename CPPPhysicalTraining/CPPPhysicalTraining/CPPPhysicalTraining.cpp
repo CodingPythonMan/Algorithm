@@ -1,71 +1,36 @@
-#include <climits>
-#include <vector>
-#include <queue>
-#include <iostream>
-using namespace std;
-
-vector<long> distances;
-vector<int> visibles;
-vector<vector<pair<int, long>>> graph;
-
-void explorer(int start)
-{
-	auto cmp = [](const pair<int, long>& p1, const pair<int, long>& p2) {
-		return (p1.second > p2.second);
-	};
-
-	priority_queue<pair<int, long>, vector<pair<int, long>>, decltype(cmp)> pq(cmp);
-	distances[start] = 0;
-	pq.push({ start, 0 });
-
-	//  Q 에 G의 모든 정점들을 넣는다.
-	while (pq.size() != 0)
-	{
-		const pair<int, long> node = pq.top();
-		pq.pop();
-
-		if (node.second > distances[node.first])
-			continue;
-
-		for (auto& next : graph[node.first])
-		{
-			if (visibles[next.first] == 0 && distances[next.first] > node.second + next.second)
-			{
-				distances[next.first] = node.second + next.second;
-				pq.push({ next.first, distances[next.first] });
-			}
-		}
-	}
-}
+#include "pch.h"
 
 int main()
 {
-	int n, e;
-	cin >> n >> e;
+	//ios_base::sync_with_stdio(false);
+	//cin.tie(nullptr);
+	//cout.tie(nullptr);
+	vector<vector<int>> times;
+	int n = 5;
+	int k = 1;
 
-	distances.resize(n);
-	visibles.resize(n);
-	graph.resize(n);
+	// 기존 알고리즘으로 틀린 부분.
+	times.push_back({ 2,4,10 });
+	times.push_back({ 5,2,38 });
+	times.push_back({ 3,4,33 });
+	times.push_back({ 4,2,76 });
+	times.push_back({ 3,2,64 });
+	times.push_back({ 1,5,54 });
+	times.push_back({ 1,4,98 });
+	times.push_back({ 2,3,61 });
+	times.push_back({ 2,1,0 });
+	times.push_back({ 3,5,77 });
+	times.push_back({ 5,1,34 });
+	times.push_back({ 3,1,79 });
+	times.push_back({ 5,3,2 });
+	times.push_back({ 1,2,59 });
+	times.push_back({ 4,3,46 });
+	times.push_back({ 5,4,44 });
+	times.push_back({ 2,5,89 });
+	times.push_back({ 4,5,21 });
+	times.push_back({ 1,3,86 });
+	times.push_back({ 4,1,95 });
 
-	for (int i = 1; i < n; i++)
-		distances[i] = LONG_MAX;
-
-	for (int i = 0; i < n; i++)
-		cin >> visibles[i];
-	visibles[n - 1] = 0;
-	
-	for (int i = 0; i < e; i++)
-	{
-		int a, b, c;
-		cin >> a >> b >> c;
-		graph[a].push_back({ b,c });
-		graph[b].push_back({ a,c });
-	}
-
-	explorer(0);
-
-	if (distances[n - 1] == LONG_MAX)
-		cout << -1;
-	else
-		cout << distances[n - 1];
+	DelayNetwork d;
+	cout << d.networkDelayTime(times, n, k) << endl;
 }
