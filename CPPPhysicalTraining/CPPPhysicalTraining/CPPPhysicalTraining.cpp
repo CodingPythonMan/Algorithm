@@ -1,36 +1,91 @@
-#include "pch.h"
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <climits>
+using namespace std;
+
+vector<vector<pair<int, int>>> graph;
+vector<int> distances;
+
+void dijkstra(int start, int n)
+{
+	for (int i = 1; i < n + 1; i++)
+		distances[i] = INT_MAX;
+
+	distances[start] = 0;
+
+	auto cmp = [](const pair<int, int>& p1, const pair<int, int>& p2) {
+		return (p1.second > p2.second);
+	};
+
+	priority_queue<pair<int, int>, vector<pair<int, int>>, decltype(cmp)> pq(cmp);
+	pq.push({ start, 0 });
+
+	while (pq.size() != 0)
+	{
+		pair<int, int> node = pq.top();
+		pq.pop();
+
+		if (node.second > distances[node.first]) 
+			continue;
+
+		for (auto& next : graph[node.first])
+		{
+			if (distances[next.first] > node.second + next.second) 
+			{
+				distances[next.first] = node.second + next.second;
+				pq.push({ next.first, distances[next.first] });
+			}
+		}
+	}
+}
+
+int explorer(int param1, int param2, int n)
+{
+	int result = 0;
+
+	dijkstra(1, n);
+	if (distances[param1] == INT_MAX)
+		return INT_MAX;
+	result += distances[param1];
+
+	dijkstra(param1, n);
+	if (distances[param2] == INT_MAX)
+		return INT_MAX;
+	result += distances[param2];
+
+	dijkstra(param2, n);
+	if (distances[n] == INT_MAX)
+		return INT_MAX;
+	result += distances[n];
+
+	return result;
+}
 
 int main()
 {
-	//ios_base::sync_with_stdio(false);
-	//cin.tie(nullptr);
-	//cout.tie(nullptr);
-	vector<vector<int>> times;
-	int n = 5;
-	int k = 1;
+	int n, e, param1, param2;
+	cin >> n >> e;
 
-	// 기존 알고리즘으로 틀린 부분.
-	times.push_back({ 2,4,10 });
-	times.push_back({ 5,2,38 });
-	times.push_back({ 3,4,33 });
-	times.push_back({ 4,2,76 });
-	times.push_back({ 3,2,64 });
-	times.push_back({ 1,5,54 });
-	times.push_back({ 1,4,98 });
-	times.push_back({ 2,3,61 });
-	times.push_back({ 2,1,0 });
-	times.push_back({ 3,5,77 });
-	times.push_back({ 5,1,34 });
-	times.push_back({ 3,1,79 });
-	times.push_back({ 5,3,2 });
-	times.push_back({ 1,2,59 });
-	times.push_back({ 4,3,46 });
-	times.push_back({ 5,4,44 });
-	times.push_back({ 2,5,89 });
-	times.push_back({ 4,5,21 });
-	times.push_back({ 1,3,86 });
-	times.push_back({ 4,1,95 });
+	graph.resize(n + 1);
+	distances.resize(n + 1);
 
-	DelayNetwork d;
-	cout << d.networkDelayTime(times, n, k) << endl;
+	for (int i = 0; i < e; i++)
+	{
+		int a, b, c;
+		cin >> a >> b >> c;
+		graph[a].push_back({ b,c });
+		graph[b].push_back({ a,c });
+	}
+	cin >> param1 >> param2;
+
+	int result = explorer(param1, param2, n);
+	int result2 = explorer(param2, param1, n);
+
+	result = result < result2 ? result : result2;
+
+	if (result != INT_MAX)
+		cout << result;
+	else
+		cout << -1;
 }
