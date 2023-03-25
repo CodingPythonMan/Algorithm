@@ -10,6 +10,9 @@
     <Filter Include="LeetCode">
       <UniqueIdentifier>{9b574704-cf14-4fff-bed3-874ed027658f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Companies">
+      <UniqueIdentifier>{15496892-aeb2-496a-89a5-f7ddca878bbf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -30,6 +33,9 @@
     <ClCompile Include="DelayNetwork.cpp">
       <Filter>LeetCode</Filter>
     </ClCompile>
+    <ClCompile Include="TakeGroup.cpp">
+      <Filter>Companies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -49,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="DelayNetwork.h">
       <Filter>LeetCode</Filter>
+    </ClInclude>
+    <ClInclude Include="TakeGroup.h">
+      <Filter>Companies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
