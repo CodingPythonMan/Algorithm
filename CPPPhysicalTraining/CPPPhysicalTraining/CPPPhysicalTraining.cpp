@@ -1,5 +1,6 @@
 #include "CorePch.h"
-#include "TakeGroup.h"
+//#include "TakeGroup.h"
+#include "UnionFInd.h"
 
 int main()
 {
@@ -13,6 +14,9 @@ int main()
 	DelayNetwork d;
 	d.networkDelayTime(graph, 4, 1);*/
 
-	TakeGroup t;
-	t.Print();
+	//TakeGroup t;
+	//t.Print();
+
+	UnionFind u;
+	u.Print();
 }
