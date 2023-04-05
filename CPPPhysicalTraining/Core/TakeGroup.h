@@ -2,6 +2,6 @@
 class TakeGroup
 {
 public:
-	void Print();
+	void solution(int n, vector<string> queryType, vector<int> student1, vector<int> student2);
 };
 

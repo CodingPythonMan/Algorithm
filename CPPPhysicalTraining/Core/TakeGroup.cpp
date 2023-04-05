@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "TakeGroup.h"
 
-void TakeGroup::Print()
+void TakeGroup::solution(int n, vector<string> queryType, vector<int> student1, vector<int> student2)
 {
-	cout << "AHh";
+
 }
