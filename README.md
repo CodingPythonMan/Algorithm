@@ -15,5 +15,8 @@ Heap Order 구현했으므로 Add 한 첫 부분부터 잘 배열된게 보임<b
 - Counting Sort, Radix Sort <br>
 기수 정렬이라는 말은 들어보았으나 실제로 구현해서 문제푸는 것은 처음
 
+- Union Find
+본래 인접 리스트로 풀었던 문제를 훨씬 더 빠르게 풀 수 있는 탐색 방법
+
 ## Example
 - [LeetCode Network Delay](https://leetcode.com/problems/network-delay-time/)

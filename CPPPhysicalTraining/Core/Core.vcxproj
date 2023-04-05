@@ -162,6 +162,7 @@
     <ClInclude Include="QuickSort.h" />
     <ClInclude Include="RadixSort.h" />
     <ClInclude Include="TakeGroup.h" />
+    <ClInclude Include="UnionFind.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CorePch.cpp" />
@@ -176,6 +177,7 @@
     <ClCompile Include="QuickSort.cpp" />
     <ClCompile Include="RadixSort.cpp" />
     <ClCompile Include="TakeGroup.cpp" />
+    <ClCompile Include="UnionFind.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

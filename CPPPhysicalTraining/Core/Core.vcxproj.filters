@@ -36,6 +36,9 @@
     <ClCompile Include="TakeGroup.cpp">
       <Filter>Companies</Filter>
     </ClCompile>
+    <ClCompile Include="UnionFind.cpp">
+      <Filter>Algorithm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -58,6 +61,9 @@
     </ClInclude>
     <ClInclude Include="TakeGroup.h">
       <Filter>Companies</Filter>
+    </ClInclude>
+    <ClInclude Include="UnionFind.h">
+      <Filter>Algorithm</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
