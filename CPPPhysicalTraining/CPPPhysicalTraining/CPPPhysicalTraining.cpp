@@ -16,7 +16,16 @@ int main()
 
 	//TakeGroup t;
 	//t.Print();
+	int n = 6;
+	vector<vector<int>> edges;
+	edges.push_back({ 0,1 });
+	edges.push_back({ 0,2 });
+	edges.push_back({ 3,5 });
+	edges.push_back({ 5,4 });
+	edges.push_back({ 4,3 });
+	int source = 0;
+	int destination = 5;
 
 	UnionFind u;
-	u.Print();
+	cout << u.validPath(n, edges, source, destination);
 }
