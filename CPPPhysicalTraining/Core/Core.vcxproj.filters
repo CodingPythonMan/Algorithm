@@ -13,6 +13,9 @@
     <Filter Include="Companies">
       <UniqueIdentifier>{15496892-aeb2-496a-89a5-f7ddca878bbf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Companies\Dev">
+      <UniqueIdentifier>{4963e1f2-3590-457d-a628-89e3a017f640}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -39,6 +42,18 @@
     <ClCompile Include="UnionFind.cpp">
       <Filter>Algorithm</Filter>
     </ClCompile>
+    <ClCompile Include="Snowball.cpp">
+      <Filter>Companies\Dev</Filter>
+    </ClCompile>
+    <ClCompile Include="Running.cpp">
+      <Filter>Companies\Dev</Filter>
+    </ClCompile>
+    <ClCompile Include="Delivery.cpp">
+      <Filter>Companies\Dev</Filter>
+    </ClCompile>
+    <ClCompile Include="TakeJellys.cpp">
+      <Filter>Companies\Dev</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -64,6 +79,18 @@
     </ClInclude>
     <ClInclude Include="UnionFind.h">
       <Filter>Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Snowball.h">
+      <Filter>Companies\Dev</Filter>
+    </ClInclude>
+    <ClInclude Include="Running.h">
+      <Filter>Companies\Dev</Filter>
+    </ClInclude>
+    <ClInclude Include="Delivery.h">
+      <Filter>Companies\Dev</Filter>
+    </ClInclude>
+    <ClInclude Include="TakeJellys.h">
+      <Filter>Companies\Dev</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

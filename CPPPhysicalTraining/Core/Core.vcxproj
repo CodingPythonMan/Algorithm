@@ -157,16 +157,21 @@
   <ItemGroup>
     <ClInclude Include="CorePch.h" />
     <ClInclude Include="DelayNetwork.h" />
+    <ClInclude Include="Delivery.h" />
     <ClInclude Include="MergeSort.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="QuickSort.h" />
     <ClInclude Include="RadixSort.h" />
+    <ClInclude Include="Running.h" />
+    <ClInclude Include="Snowball.h" />
     <ClInclude Include="TakeGroup.h" />
+    <ClInclude Include="TakeJellys.h" />
     <ClInclude Include="UnionFind.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CorePch.cpp" />
     <ClCompile Include="DelayNetwork.cpp" />
+    <ClCompile Include="Delivery.cpp" />
     <ClCompile Include="MergeSort.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -176,7 +181,10 @@
     </ClCompile>
     <ClCompile Include="QuickSort.cpp" />
     <ClCompile Include="RadixSort.cpp" />
+    <ClCompile Include="Running.cpp" />
+    <ClCompile Include="Snowball.cpp" />
     <ClCompile Include="TakeGroup.cpp" />
+    <ClCompile Include="TakeJellys.cpp" />
     <ClCompile Include="UnionFind.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
