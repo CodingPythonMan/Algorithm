@@ -1,13 +1,16 @@
 #include "CorePch.h"
-#include "TakeJellys.h"
+#include "FractionalKnapsack.h"
 
 int main()
 {
-	TakeJellys j;
-	vector<string> v;
-	v.push_back("cab");
-	v.push_back("adaaa");
-	v.push_back("e");
+	vector<vector<int>> arr;
 
-	j.solution(v);
+	arr.push_back({60, 10});
+	arr.push_back({100, 20});
+	arr.push_back({120, 30});
+
+	int weight = 50;
+
+	FractionalKnapsack f;
+	cout << f.solution(arr, weight);
 }

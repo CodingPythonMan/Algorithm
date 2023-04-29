@@ -54,6 +54,9 @@
     <ClCompile Include="TakeJellys.cpp">
       <Filter>Companies\Dev</Filter>
     </ClCompile>
+    <ClCompile Include="FractionalKnapsack.cpp">
+      <Filter>Algorithm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -91,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="TakeJellys.h">
       <Filter>Companies\Dev</Filter>
+    </ClInclude>
+    <ClInclude Include="FractionalKnapsack.h">
+      <Filter>Algorithm</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
