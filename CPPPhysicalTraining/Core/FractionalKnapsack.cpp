@@ -18,7 +18,7 @@ double FractionalKnapsack::solution(vector<vector<int>>& arr, int weight)
 		backpacks.push_back({a[0],a[1]});
 
 	auto cmp = [](BackPack& b1, BackPack& b2) {
-		return b1.value < b2.value;
+		return (b1.weight*100 / b1.value) < (b2.weight*100 / b2.value);
 	};
 
 	sort(backpacks.begin(), backpacks.end(), cmp);
@@ -37,7 +37,7 @@ double FractionalKnapsack::solution(vector<vector<int>>& arr, int weight)
 		}
 		else if(backpack.weight > weight)
 		{
-			result += (backpack.value*(static_cast<double>(weight) / static_cast<double>(backpack.weight)));
+			result += (static_cast<double>(backpack.value*weight) / static_cast<double>(backpack.weight));
 			break;
 		}
 	}
