@@ -18,12 +18,12 @@
     <ClCompile Include="BackJoon.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="BOJ1152_WordCount.cpp">
+    <ClCompile Include="BOJ_CLASS1.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BOJ1152_WordCount.h">
+    <ClInclude Include="BOJ_CLASS1.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

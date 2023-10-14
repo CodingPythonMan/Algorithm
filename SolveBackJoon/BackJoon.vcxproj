@@ -128,10 +128,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BackJoon.cpp" />
-    <ClCompile Include="BOJ1152_WordCount.cpp" />
+    <ClCompile Include="BOJ_CLASS1.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BOJ1152_WordCount.h" />
+    <ClInclude Include="BOJ_CLASS1.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
