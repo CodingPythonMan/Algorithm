@@ -3,38 +3,34 @@ using namespace std;
 
 int main()
 {
-	int n;
-	cin >> n;
-
-	string* str = new string[n];
-
-	for (int i = 0; i < n; i++)
+	while (1)
 	{
-		cin >> str[i];
-	}
+		string str;
+		cin >> str;
 
-	for (int i = 0; i < n-1; i++)
-	{
-		for (int j = 0; j < n - 2; j++)
+		if (str.compare("0") == 0)
+			break;
+
+		bool answer = false;
+
+		string cmpStr = str;
+		for (size_t i = 0; i < str.length(); i++)
 		{
-			string tempStr;
+			cmpStr[str.length()-1 - i] = str[i];
+		}
 
-			if (str[i].length() > str[i + 1].length())
-			{
-				tempStr = str[i];
-				str[i] = str[i + 1];
-				str[i + 1] = tempStr;
-			}
-			else if (str[i].length() == str[i + 1].length())
-			{
-				for (int k = 0; k < str[i].length(); k++)
-				{
-					if (str[k] == str[k + 1])
-					{
+		if (cmpStr.compare(str) == 0)
+			answer = true;
+		else
+			answer = false;
 
-					}
-				}
-			}
+		if (answer)
+		{
+			cout << "yes" << "\n";
+		}
+		else
+		{
+			cout << "no" << "\n";
 		}
 	}
 }
