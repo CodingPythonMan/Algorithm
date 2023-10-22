@@ -1,5 +1,41 @@
 #include <iostream>
+#include <string>
 using namespace std;
+
+void BOJ1436_SHAWM()
+{
+	int n;
+	cin >> n;
+
+	int num = 0;
+	int answer = 666;
+
+	while (true)
+	{
+		string str = to_string(answer);
+		int ans = 0;
+		for (size_t i = 0; i < str.length(); i++)
+		{
+			if (str[i] == '6')
+				ans++;
+			else
+				ans = 0;
+
+			if (ans > 2)
+			{
+				num++;
+				break;
+			}
+		}
+
+		if (num == n)
+			break;
+
+		answer++;
+	}
+
+	cout << answer;
+}
 
 int compareStr(string* a, string* b)
 {
