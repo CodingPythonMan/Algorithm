@@ -1,6 +1,28 @@
 ﻿#include <iostream>
 using namespace std;
 
+void QuickSort(int arr[], int left, int right)
+{
+	if (left <= right)
+		return;
+
+	int& pivot = arr[left];
+	int low = left + 1;
+	int high = right;
+
+	for (; high < right; high++)
+	{
+
+	}
+
+	swap(arr[low], arr[high]);
+
+	swap(pivot, arr[high]);
+
+	QuickSort(arr, left, right - 1);
+	QuickSort(arr, left, right);
+}
+
 int BinarySearch(int arr[], int first, int last, int target)
 {
 	int mid;
