@@ -1,53 +1,21 @@
 ﻿#include <iostream>
+#include <algorithm>
 using namespace std;
-
-void swap(int arr[], int index1, int index2)
-{
-	int temp = arr[index1];
-	arr[index1] = arr[index2];
-	arr[index2] = arr[index1];
-}
-
-void QuickSort(int arr[], int left, int right)
-{
-	if (left >= right)
-		return;
-
-	int pivot = arr[left];
-	int low = left + 1;
-	int high = right;
-
-	while (low <= high)
-	{
-		while (pivot > arr[low])
-			low++;
-
-		while (pivot < arr[high])
-			high--;
-
-		if(low < high)
-			swap(arr[low], arr[high]);
-	}
-	swap(arr[left], arr[high]);
-
-	QuickSort(arr, left, high - 1);
-	QuickSort(arr, high + 1, right);
-}
 
 int BinarySearch(int arr[], int first, int last, int target)
 {
-	int mid;
-	if (first > last)
-		return -1;
+	while (first <= last)
+	{
+		int mid = (first + last) / 2;
+		if (arr[mid] == target)
+			return mid;
+		else if (arr[mid] > target)
+			last = mid - 1;
+		else
+			first = mid + 1;
+	}
 
-	mid = (first + last) / 2;
-
-	if (arr[mid] == target)
-		return mid;
-	else if (target < arr[mid])
-		return BinarySearch(arr, first, mid - 1, target);
-	else
-		return BinarySearch(arr, mid + 1, last, target);
+	return -1;
 }
 
 int main()
@@ -69,11 +37,11 @@ int main()
 		cin >> arr2[i];
 	}
 
-	QuickSort(arr, 0, n-1);
+	sort(arr, arr+n);
 
 	for (int i = 0; i < m; i++)
 	{
-		if(BinarySearch(arr, 0, n, arr2[i]) >= 0)
+		if(BinarySearch(arr, 0, n-1, arr2[i]) >= 0)
 			cout << 1 << "\n";
 		else
 			cout << 0 << "\n";
