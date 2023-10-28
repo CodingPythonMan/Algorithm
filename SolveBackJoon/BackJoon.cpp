@@ -1,26 +1,37 @@
 ﻿#include <iostream>
 using namespace std;
 
+void swap(int arr[], int index1, int index2)
+{
+	int temp = arr[index1];
+	arr[index1] = arr[index2];
+	arr[index2] = arr[index1];
+}
+
 void QuickSort(int arr[], int left, int right)
 {
-	if (left <= right)
+	if (left >= right)
 		return;
 
-	int& pivot = arr[left];
+	int pivot = arr[left];
 	int low = left + 1;
 	int high = right;
 
-	for (; high < right; high++)
+	while (low <= high)
 	{
+		while (pivot > arr[low])
+			low++;
 
+		while (pivot < arr[high])
+			high--;
+
+		if(low < high)
+			swap(arr[low], arr[high]);
 	}
+	swap(arr[left], arr[high]);
 
-	swap(arr[low], arr[high]);
-
-	swap(pivot, arr[high]);
-
-	QuickSort(arr, left, right - 1);
-	QuickSort(arr, left, right);
+	QuickSort(arr, left, high - 1);
+	QuickSort(arr, high + 1, right);
 }
 
 int BinarySearch(int arr[], int first, int last, int target)
@@ -58,10 +69,13 @@ int main()
 		cin >> arr2[i];
 	}
 
-	
+	QuickSort(arr, 0, n-1);
 
 	for (int i = 0; i < m; i++)
 	{
-		cout << BinarySearch(arr, 0, n, arr2[i]) << "\n";
+		if(BinarySearch(arr, 0, n, arr2[i]) >= 0)
+			cout << 1 << "\n";
+		else
+			cout << 0 << "\n";
 	}
 }
