@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <algorithm>
 using namespace std;
 
 void BOJ1436_SHAWM()
@@ -144,4 +145,84 @@ void BOJ1181_Sort()
 		cout << str[i] << "\n";
 		repeat = str[i];
 	}
+}
+
+int BinarySearch(int arr[], int first, int last, int target)
+{
+	while (first <= last)
+	{
+		int mid = (first + last) / 2;
+		if (arr[mid] == target)
+			return mid;
+		else if (arr[mid] > target)
+			last = mid - 1;
+		else
+			first = mid + 1;
+	}
+
+	return -1;
+}
+
+void BOJ1920_FindNumber()
+{
+	int n;
+	cin >> n;
+
+	int* arr = new int[n];
+	for (int i = 0; i < n; i++)
+	{
+		cin >> arr[i];
+	}
+
+	int m;
+	cin >> m;
+	int* arr2 = new int[m];
+	for (int i = 0; i < m; i++)
+	{
+		cin >> arr2[i];
+	}
+
+	sort(arr, arr + n);
+
+	for (int i = 0; i < m; i++)
+	{
+		if (BinarySearch(arr, 0, n - 1, arr2[i]) >= 0)
+			cout << 1 << "\n";
+		else
+			cout << 0 << "\n";
+	}
+}
+
+void BOJ1978_FindSosu()
+{
+	int n;
+	cin >> n;
+
+	int* arr = new int[n];
+	for (int i = 0; i < n; i++)
+	{
+		cin >> arr[i];
+	}
+
+	int sosuList[1001] = { 0 };
+
+	for (int i = 2; i < 1001; i++)
+	{
+		if (sosuList[i] == 2)
+			continue;
+
+		sosuList[i] = 1;
+		for (int j = i + 1; j < 1001; j++)
+		{
+			if (j % i == 0)
+				sosuList[j] = 2;
+		}
+	}
+
+	int answer = 0;
+	for (int i = 0; i < n; i++)
+		if (sosuList[arr[i]] == 1)
+			answer++;
+
+	cout << answer << "\n";
 }
