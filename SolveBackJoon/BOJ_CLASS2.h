@@ -7,3 +7,5 @@ void BOJ1436_SHAWM();
 void BOJ1920_FindNumber();
 
 void BOJ1978_FindSosu();
+
+void BOJ1074_Z();

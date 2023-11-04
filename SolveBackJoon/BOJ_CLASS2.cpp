@@ -226,3 +226,39 @@ void BOJ1978_FindSosu()
 
 	cout << answer << "\n";
 }
+
+int n, r, c;
+int result;
+
+void Search(int y, int x, int size)
+{
+	if (y == r && x == c)
+	{
+		cout << result << "\n";
+		return;
+	}
+
+	if (r < y + size && r >= y && c < x + size && c >= x)
+	{
+		Search(y, x, size / 2);
+		Search(y, x + size / 2, size / 2);
+		Search(y + size / 2, x, size / 2);
+		Search(y + size / 2, x + size / 2, size / 2);
+	}
+	else
+	{
+		result += size * size;
+	}
+}
+
+void BOJ1074_Z()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+
+	cin >> n;
+	cin >> r;
+	cin >> c;
+
+	Search(0, 0, (1 << n));
+}
