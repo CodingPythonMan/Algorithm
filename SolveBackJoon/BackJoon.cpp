@@ -10,51 +10,40 @@ struct Client
 
 int order = 0;
 
+void Swap(Client& a, Client& b)
+{
+	Client temp = a;
+	a = b;
+	b = temp;
+}
+
 void QuickSort(Client* clients, int left, int right)
 {
-	while (left < right)
+	if (left >= right)
+		return;
+
+	Client* pivot = &clients[right];
+	int low = left;
+
+	for (int high = left; high < right; high++)
 	{
-		Client* pivot = &clients[left];
-		int low = left + 1;
-		int high = right;
-
-		while (low <= high)
+		if (clients[high].age > pivot->age)
 		{
-			while (pivot->age >= clients[low].age)
-			{
-				if (pivot->age == clients[low].age && pivot->order >= clients[low].order)
-				{
-					break;
-				}
-
-				low++;
-			}
-
-			while (pivot->age <= clients[high].age)
-			{
-				if (pivot->age == clients[high].age && pivot->order <= clients[high].order)
-				{
-					break;
-				}
-
-				high--;
-			}
-
-			if (low <= high)
-			{
-				Client temp = clients[low];
-				clients[low] = clients[high];
-				clients[high] = temp;
-			}
+			continue;
 		}
 
-		Client temp = *pivot;
-		*pivot = clients[high];
-		clients[high] = temp;
+		if (clients[high].age == pivot->age && clients[high].order > pivot->order)
+		{
+			continue;
+		}
 
-		QuickSort(clients, left, high - 1);
-		QuickSort(clients, high + 1, right);
+		Swap(clients[low], clients[high]);
+		low++;
 	}
+	Swap(clients[low], *pivot);
+
+	QuickSort(clients, left, low - 1);
+	QuickSort(clients, low + 1, right);
 }
 
 int main()
@@ -78,7 +67,7 @@ int main()
 
 	for (int i = 0; i < n; i++)
 	{
-		cout << clients[i].age << clients[i].name << "\n";
+		cout << clients[i].age << " " << clients[i].name << "\n";
 	}
 
 	delete[] clients;
