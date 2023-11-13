@@ -10,40 +10,79 @@ struct Client
 
 int order = 0;
 
-void Swap(Client& a, Client& b)
+int CompareClient(Client& a, Client& b)
 {
-	Client temp = a;
-	a = b;
-	b = temp;
+	if (a.age < b.age)
+	{
+		return 1;
+	}
+	else if (a.age == b.age)
+	{
+		if (a.order < b.order)
+		{
+			return 1;
+		}
+		else
+			return -1;
+	}
+	else
+	{
+		return -1;
+	}
 }
 
-void QuickSort(Client* clients, int left, int right)
+void MergeSort(Client* clients, int first, int end)
 {
-	if (left >= right)
+	if (first >= end)
 		return;
 
-	Client* pivot = &clients[right];
-	int low = left;
+	int mid = (first + end) / 2;
 
-	for (int high = left; high < right; high++)
+	MergeSort(clients, first, mid);
+	MergeSort(clients, mid + 1, end);
+
+	int left = first;
+	int right = mid+1;
+	int index = first;
+	Client* clientList = new Client[end-first+1];
+
+	while (left <= mid && right <= end)
 	{
-		if (clients[high].age > pivot->age)
+		if (CompareClient(clients[left], clients[right]) < 0)
 		{
-			continue;
+			clientList[index] = clients[left];
+			left++;
+			index++;
 		}
-
-		if (clients[high].age == pivot->age && clients[high].order > pivot->order)
+		else
 		{
-			continue;
+			clientList[index] = clients[right];
+			right++;
+			index++;
 		}
-
-		Swap(clients[low], clients[high]);
-		low++;
 	}
-	Swap(clients[low], *pivot);
 
-	QuickSort(clients, left, low - 1);
-	QuickSort(clients, low + 1, right);
+	if (left > mid)
+	{
+		for (int i = right; i <= end; i++)
+		{
+			clientList[index] = clients[i];
+			index++;
+		}
+	}
+	else
+	{
+		for (int i = left; i <= mid; i++)
+		{
+			clientList[index] = clients[i];
+			index++;
+		}
+	}
+
+	for (int i = first; i <= end; i++)
+		clients[i] = clientList[i];
+
+	delete[] clientList;
 }
 
 int main()
@@ -63,7 +102,7 @@ int main()
 		order++;
 	}
 
-	QuickSort(clients, 0, n-1);
+	MergeSort(clients, 0, n-1);
 
 	for (int i = 0; i < n; i++)
 	{
