@@ -9,3 +9,5 @@ void BOJ1920_FindNumber();
 void BOJ1978_FindSosu();
 
 void BOJ1074_Z();
+
+void BOJ10814_Age();
