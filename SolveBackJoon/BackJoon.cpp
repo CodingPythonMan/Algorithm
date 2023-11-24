@@ -2,11 +2,11 @@
 #include <string.h>
 using namespace std;
 
-int stacks[10000];
-int stackIndex = 0;
-
 int main()
 {
+	int* queues = new int[10000];
+	int front = 0;
+	int back = 0;
 	int commandCount = 0;
 
 	cin >> commandCount;
@@ -21,33 +21,40 @@ int main()
 		if (strcmp(command, "push") == 0)
 		{
 			cin >> value;
-			stacks[stackIndex] = value;
-			stackIndex++;
+			queues[back] = value;
+			back++;
 		}
 		else if (strcmp(command, "pop") == 0)
 		{
-			if (stackIndex > 0)
+			if (back - front > 0)
 			{
-				stackIndex--;
-				cout << stacks[stackIndex] << "\n";
+				cout << queues[front] << "\n";
+				front++;
 			}
 			else
 				cout << -1 << "\n";
 		}
-		else if (strcmp(command, "top") == 0)
+		else if (strcmp(command, "front") == 0)
 		{
-			if (stackIndex > 0)
-				cout << stacks[stackIndex - 1] << "\n";
+			if (back - front > 0)
+				cout << queues[front] << "\n";
+			else
+				cout << -1 << "\n";
+		}
+		else if (strcmp(command, "back") == 0)
+		{
+			if (back - front > 0)
+				cout << queues[back-1] << "\n";
 			else
 				cout << -1 << "\n";
 		}
 		else if (strcmp(command, "size") == 0)
 		{
-			cout << stackIndex << "\n";
+			cout << back - front << "\n";
 		}
 		else if (strcmp(command, "empty") == 0)
 		{
-			if (stackIndex == 0)
+			if (back - front == 0)
 				cout << 1 << "\n";
 			else
 				cout << 0 << "\n";
