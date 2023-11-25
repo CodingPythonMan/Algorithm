@@ -11,25 +11,45 @@ int main()
 
 	cin >> commandCount;
 
-	char command[10];
+	char command[15];
 	int value;
 	for (int i = 0; i < commandCount; i++)
 	{
-		memset(command, 0, 10);
+		memset(command, 0, 15);
 		cin >> command;
 
-		if (strcmp(command, "push") == 0)
+		if (strcmp(command, "push_back") == 0)
 		{
 			cin >> value;
 			queues[back] = value;
 			back++;
 		}
-		else if (strcmp(command, "pop") == 0)
+		else if (strcmp(command, "push_front") == 0)
+		{
+			cin >> value;
+			for (int i = back-1; i >= front; i--)
+			{
+				queues[i+1] = queues[i];
+			}
+			back++;
+			queues[front] = value;
+		}
+		else if (strcmp(command, "pop_front") == 0)
 		{
 			if (back - front > 0)
 			{
 				cout << queues[front] << "\n";
 				front++;
+			}
+			else
+				cout << -1 << "\n";
+		}
+		else if (strcmp(command, "pop_back") == 0)
+		{
+			if (back - front > 0)
+			{
+				cout << queues[back-1] << "\n";
+				back--;
 			}
 			else
 				cout << -1 << "\n";
