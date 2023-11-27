@@ -1,83 +1,37 @@
 ﻿#include <iostream>
-#include <string.h>
 using namespace std;
 
 int main()
 {
-	int* queues = new int[10000];
-	int front = 0;
-	int back = 0;
-	int commandCount = 0;
+	int n, k;
 
-	cin >> commandCount;
+	cin >> n >> k;
 
-	char command[15];
-	int value;
-	for (int i = 0; i < commandCount; i++)
+	int** num = new int*[n+1];
+	for (int i = 0; i < n+1; i++)
 	{
-		memset(command, 0, 15);
-		cin >> command;
+		num[i] = new int[n+1];
+	}
 
-		if (strcmp(command, "push_back") == 0)
+	for (int i = 0; i < n+1; i++)
+	{
+		for (int j = 0; j < k+1; j++)
 		{
-			cin >> value;
-			queues[back] = value;
-			back++;
-		}
-		else if (strcmp(command, "push_front") == 0)
-		{
-			cin >> value;
-			for (int i = back-1; i >= front; i--)
+			if (i == j || i == 0 || j == 0)
 			{
-				queues[i+1] = queues[i];
+				num[i][j] = 1;
+				continue;
 			}
-			back++;
-			queues[front] = value;
-		}
-		else if (strcmp(command, "pop_front") == 0)
-		{
-			if (back - front > 0)
-			{
-				cout << queues[front] << "\n";
-				front++;
-			}
-			else
-				cout << -1 << "\n";
-		}
-		else if (strcmp(command, "pop_back") == 0)
-		{
-			if (back - front > 0)
-			{
-				cout << queues[back-1] << "\n";
-				back--;
-			}
-			else
-				cout << -1 << "\n";
-		}
-		else if (strcmp(command, "front") == 0)
-		{
-			if (back - front > 0)
-				cout << queues[front] << "\n";
-			else
-				cout << -1 << "\n";
-		}
-		else if (strcmp(command, "back") == 0)
-		{
-			if (back - front > 0)
-				cout << queues[back-1] << "\n";
-			else
-				cout << -1 << "\n";
-		}
-		else if (strcmp(command, "size") == 0)
-		{
-			cout << back - front << "\n";
-		}
-		else if (strcmp(command, "empty") == 0)
-		{
-			if (back - front == 0)
-				cout << 1 << "\n";
-			else
-				cout << 0 << "\n";
+
+			num[i][j] = num[i-1][j-1] + num[i-1][j];
 		}
 	}
+
+	cout << num[n][k] << "\n";
+
+	for (int i = 0; i < n; i++)
+	{
+		delete[] num[i];
+	}
+	delete[] num;
 }
