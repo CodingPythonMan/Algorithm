@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <algorithm>
 using namespace std;
 
 struct Pos {
@@ -7,6 +8,7 @@ public:
 	int _y;
 };
 
+/*
 void SwapPos(Pos& pos1, Pos& pos2)
 {
 	Pos pos = pos1;
@@ -14,21 +16,16 @@ void SwapPos(Pos& pos1, Pos& pos2)
 	pos2 = pos;
 }
 
-int ComparePos(const Pos& pos1, const Pos& pos2)
+bool ComparePos(const Pos& pos1, const Pos& pos2)
 {
 	if (pos1._x < pos2._x)
-		return 1;
+		return true;
 	else if (pos1._x == pos2._x)
 	{
-		if (pos1._y < pos2._y)
-			return 1;
-		else if (pos1._y == pos2._y)
-			return 0;
-		else
-			return -1;
+		return pos1._y < pos2._y;
 	}
 	else
-		return -1;
+		return false;
 }
 
 void QuickSort(Pos* posArray, int left, int right)
@@ -43,7 +40,7 @@ void QuickSort(Pos* posArray, int left, int right)
 	Pos& pivot = posArray[right];
 	for (; j < right; j++)
 	{
-		if (1 == ComparePos(posArray[j], pivot))
+		if (ComparePos(posArray[j], pivot))
 		{
 			SwapPos(posArray[i], posArray[j]);
 			i++;
@@ -53,7 +50,7 @@ void QuickSort(Pos* posArray, int left, int right)
 	
 	QuickSort(posArray, left, i-1);
 	QuickSort(posArray, i+1, right);
-}
+}*/
 
 int main()
 {
@@ -67,7 +64,19 @@ int main()
 		cin >> posArray[i]._x >> posArray[i]._y;
 	}
 
-	QuickSort(posArray, 0, n - 1);
+	//QuickSort(posArray, 0, n - 1);
+
+	sort(posArray, posArray + n, [](const Pos& pos1, const Pos& pos2)
+	{
+		if (pos1._x < pos2._x)
+			return true;
+		else if (pos1._x == pos2._x)
+		{
+			return pos1._y < pos2._y;
+		}
+		else
+			return false;
+	});
 
 	for (int i = 0; i < n; i++)
 		cout << posArray[i]._x << " " << posArray[i]._y << "\n";
