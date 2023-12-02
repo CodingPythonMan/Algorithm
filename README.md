@@ -25,6 +25,7 @@ Class 01
 
 Class 02
 (2023-10-21) [영화감독 쇼](https://www.acmicpc.net/problem/1436)
+Class 02 중간까지 풀었다
 
 ## Example
 - [LeetCode Network Delay](https://leetcode.com/problems/network-delay-time/)
