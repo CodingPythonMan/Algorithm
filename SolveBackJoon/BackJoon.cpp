@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <stack>
+#include <vector>
 using namespace std;
 
 int main()
@@ -13,36 +14,53 @@ int main()
 	for (int i = 0; i < n; i++)
 		cin >> arr[i];
 
-	char* output = new char[100000];
+	vector<char> commands;
 
 	int num = 1;
 	int order = 0;
+	int command = 0;
 	while (1)
 	{
-		if (Stack.top() == arr[order])
+		if (Stack.size() != 0)
 		{
-		}
-		else if (Stack.top() == arr[order])
-		{
-
+			if (Stack.top() > arr[order])
+			{
+				cout << "NO";
+				return 0;
+			}
+			else if (Stack.top() == arr[order])
+			{
+				Stack.pop();
+				commands.push_back('-');
+				command++;
+				order++;
+			}
+			else
+			{
+				Stack.push(num);
+				commands.push_back('+');
+				command++;
+				num++;
+			}
 		}
 		else
 		{
 			Stack.push(num);
+			commands.push_back('+');
+			command++;
+			num++;
 		}
 
-		if (j == n)
+		if (order == n)
 		{
 			break;
 		}
-
-		num++;
 	}
 
-	for (int i = 0; i < j; i++)
+	for (int i = 0; i < command; i++)
 	{
-
+		cout << commands[i] << "\n";
 	}
 
-	cout << "NO";
+	return 0;
 }
