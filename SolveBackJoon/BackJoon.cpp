@@ -1,66 +1,64 @@
 ﻿#include <iostream>
-#include <stack>
 #include <vector>
 using namespace std;
 
+struct Doc
+{
+	int Order;
+	int Data;
+};
+
 int main()
 {
-	stack<int> Stack;
-
-	int n;
-	cin >> n;
-
-	int* arr = new int[n];
-	for (int i = 0; i < n; i++)
-		cin >> arr[i];
-
-	vector<char> commands;
-
-	int num = 1;
-	int order = 0;
-	int command = 0;
-	while (1)
+	int test;
+	cin >> test;
+	vector<Doc> Queue;
+	for (int i = 0; i < test; i++)
 	{
-		if (Stack.size() != 0)
+		int n, m;
+		cin >> n >> m;
+
+		int num;
+		for (int j = 0; j < n; j++)
 		{
-			if (Stack.top() > arr[order])
-			{
-				cout << "NO";
-				return 0;
-			}
-			else if (Stack.top() == arr[order])
-			{
-				Stack.pop();
-				commands.push_back('-');
-				command++;
-				order++;
-			}
-			else
-			{
-				Stack.push(num);
-				commands.push_back('+');
-				command++;
-				num++;
-			}
-		}
-		else
-		{
-			Stack.push(num);
-			commands.push_back('+');
-			command++;
-			num++;
+			cin >> num;
+			Doc doc;
+			doc.Order = j;
+			doc.Data = num;
+			Queue.push_back(doc);
 		}
 
-		if (order == n)
+		Doc front;
+		int loop = 0;
+		while (1)
 		{
-			break;
+			front = Queue[0];
+
+			bool right = false;
+			for (int j = 0; j < Queue.size(); j++)
+			{
+				if (front.Data < Queue[j].Data)
+				{
+					Queue.erase(Queue.begin());
+					Queue.push_back(front);
+					right = true;
+					break;
+				}
+			}
+
+			if (right)
+				continue;
+
+			Queue.erase(Queue.begin());
+			loop++;
+
+			if (m == front.Order)
+			{
+				break;
+			}
 		}
+
+		Queue.clear();
+		cout << loop << "\n";
 	}
-
-	for (int i = 0; i < command; i++)
-	{
-		cout << commands[i] << "\n";
-	}
-
-	return 0;
 }
