@@ -1,39 +1,44 @@
 ﻿#include <iostream>
 using namespace std;
 
-int Constructor(int num)
-{
-	int value = num;
-	for (int i = 0; value > 0; i++)
-	{
-		num += (value % 10);
-		value /= 10;
-	}
-	
-	return num;
-}
-
 int main()
 {
-	int n;
-	cin >> n;
-	int* arr = new int[n];
-	for (int i = 0; i < n; i++)
-	{
-		arr[i] = Constructor(i);
-	}
+	int T;
+	cin >> T;
 
-	for (int i = 0; i < n; i++)
+	int k, n;
+	for (int i = 0; i < T; i++)
 	{
-		if (arr[i] == n)
+		cin >> k >> n;
+		int** secArr = new int*[k + 1];
+		for (int j = 0; j < k + 1; j++)
 		{
-			cout << i << "\n";
-			delete[] arr;
-			return 0;
+			secArr[j] = new int[n + 1];
 		}
+
+		for (int ho = 0; ho < n + 1; ho++)
+		{
+			secArr[0][ho] = ho;
+		}
+
+		for (int floor = 1; floor < k + 1; floor++)
+		{
+			secArr[floor][1] = 1;
+			secArr[floor][0] = 0;
+		}
+
+		for (int j = 1; j < k + 1; j++)
+		{
+			for (int ho = 1; ho < n + 1; ho++)
+			{
+				secArr[j][ho] = secArr[j-1][ho] + secArr[j][ho-1];
+			}
+		}
+
+		cout << secArr[k][n] << "\n";
+		for (int j = 0; j < k; j++)
+			delete[] secArr[j];
+
+		delete[] secArr;
 	}
-
-	cout << 0 << "\n";
-
-	delete[] arr;
 }
