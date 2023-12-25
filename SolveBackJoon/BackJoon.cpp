@@ -1,41 +1,28 @@
 ﻿#include <iostream>
-#include <vector>
-#include <algorithm>
 using namespace std;
-
-struct Pos {
-	int X;
-	int Y;
-	int Rank;
-};
 
 int main()
 {
-	int n;
-	cin >> n;
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
 
-	vector<Pos> Infos;
-	for (int i = 0; i < n; i++)
-	{
-		Pos Info;
-		Info.Rank = 1;
-		cin >> Info.X >> Info.Y;
-		Infos.push_back(Info);
+	int N;
+	cin >> N;
+
+	int input[10001] = { 0 };
+
+	for (int i = 0; i < N; i++) {
+		int in;
+		cin >> in;
+		input[in] += 1;
 	}
 
-	for (int i = 0; i < n; i++)
+	for (int i = 1; i < 10001; i++) 
 	{
-		for (int j = 0; j < n; j++)
+		for (int j = 0; j < input[i]; j++) 
 		{
-			if (Infos[i].X > Infos[j].X && Infos[i].Y > Infos[j].Y)
-			{
-				Infos[j].Rank++;
-			}
+			cout << i << '\n';
 		}
-	}
-
-	for (int i = 0; i < n; i++)
-	{
-		cout << Infos[i].Rank << " ";
 	}
 }
