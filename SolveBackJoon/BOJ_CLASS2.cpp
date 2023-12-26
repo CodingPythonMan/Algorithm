@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <vector>
+#include "BOJ_CLASS2.h"
 using namespace std;
 
 void BOJ1436_SHAWM()
@@ -469,4 +471,48 @@ void BOJ_Deck()
 	}
 
 	delete[] queues;
+}
+
+void BOJ_18110()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int n;
+	cin >> n;
+
+	if (n == 0)
+	{
+		cout << 0;
+		return;
+	}
+
+	// n 이 정해짐과 동시에 절사가 정해진다.
+	double cut = n * 0.15;
+	cut = round(cut);
+
+	double sum = 0;
+	int num;
+	vector<int> Arr;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> num;
+		Arr.push_back(num);
+	}
+
+	sort(Arr.begin(), Arr.end());
+	for (int i = 0; i < n; i++)
+	{
+		if (i < cut)
+			continue;
+
+		if (n - i <= cut)
+			continue;
+
+		sum += Arr[i];
+	}
+
+	sum = round(sum / (n - cut * 2));
+	cout << sum;
 }

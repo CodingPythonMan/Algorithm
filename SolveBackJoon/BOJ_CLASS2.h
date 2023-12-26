@@ -15,3 +15,5 @@ void BOJ10814_Age();
 void BOJ_Stack();
 
 void BOJ_Deck();
+
+void BOJ_18110();
