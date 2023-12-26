@@ -1,12 +1,6 @@
 ﻿#include <iostream>
-#include <vector>
-#include <algorithm>
+#include <string>
 using namespace std;
-
-struct Pos {
-	int X;
-	int Y;
-};
 
 int main()
 {
@@ -14,26 +8,26 @@ int main()
 	cin.tie(NULL);
 	cout.tie(NULL);
 
+	int M = 1234567891;
+	int r = 31;
+
+	string String;
+
 	int n;
 	cin >> n;
-	vector<Pos> arr;
+	unsigned long long sum = 0;
+	cin >> String;
 	for (int i = 0; i < n; i++)
 	{
-		Pos pos;
-		cin >> pos.X >> pos.Y;
-		arr.push_back(pos);
-	}
-
-	sort(arr.begin(), arr.end(), [](const Pos& o1, const Pos& o2) {
-		if (o1.Y == o2.Y)
+		unsigned long long num = String[i] - 'a' + 1;
+		for (int j = 0; j < i; j++)
 		{
-			return o1.X < o2.X;
+			num *= r;
+			num %= M;
 		}
-		return o1.Y < o2.Y;
-	});
 
-	for (int i = 0; i < n; i++)
-	{
-		cout << arr[i].X << " " << arr[i].Y << "\n";
+		sum += num;
 	}
+
+	cout << sum % M << "\n";
 }
