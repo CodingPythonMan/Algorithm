@@ -1,5 +1,12 @@
 ﻿#include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
+
+struct Pos {
+	int X;
+	int Y;
+};
 
 int main()
 {
@@ -7,22 +14,26 @@ int main()
 	cin.tie(NULL);
 	cout.tie(NULL);
 
-	int N;
-	cin >> N;
-
-	int input[10001] = { 0 };
-
-	for (int i = 0; i < N; i++) {
-		int in;
-		cin >> in;
-		input[in] += 1;
+	int n;
+	cin >> n;
+	vector<Pos> arr;
+	for (int i = 0; i < n; i++)
+	{
+		Pos pos;
+		cin >> pos.X >> pos.Y;
+		arr.push_back(pos);
 	}
 
-	for (int i = 1; i < 10001; i++) 
-	{
-		for (int j = 0; j < input[i]; j++) 
+	sort(arr.begin(), arr.end(), [](const Pos& o1, const Pos& o2) {
+		if (o1.Y == o2.Y)
 		{
-			cout << i << '\n';
+			return o1.X < o2.X;
 		}
+		return o1.Y < o2.Y;
+	});
+
+	for (int i = 0; i < n; i++)
+	{
+		cout << arr[i].X << " " << arr[i].Y << "\n";
 	}
 }
