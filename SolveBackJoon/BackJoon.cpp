@@ -1,24 +1,47 @@
-﻿#include <iostream>
+﻿#include <string>
 #include <vector>
+#include <algorithm>
+#include <iostream>
+#include <cmath>
 using namespace std;
 
-int main() 
+vector<int> dp;
+bool btnList[10] = { false };
+
+bool check(int now) 
 {
-	int n;
-	cin >> n;
-
-	int Ban, btn;
-	cin >> Ban;
-	vector<int> BanBtn;
-	for (int i = 0; i < Ban; i++)
+	string target = to_string(now);
+	for (int i = 0; i < target.length(); i++)
 	{
-		cin >> btn;
-		BanBtn.push_back(btn);
+		if (true == btnList[target[i] - 48])
+			return false;
+	}
+	return true;
+}
+
+int main() {
+	int n, banBtnCount;
+	cin >> n >> banBtnCount;
+
+	int ban;
+
+	for (int i = 0; i < banBtnCount; i++) 
+	{
+		cin >> ban;
+		btnList[ban] = true;
 	}
 
-	vector<int> Pos;
-	for (int i = 0; i < n; i++)
+	int minimum = abs(n - 100);
+	for (int i = 0; i <= 1000000; i++) 
 	{
-		
+		if (true == check(i)) 
+		{
+			int tmp = abs(n - i) + (int)(to_string(i).length());
+			minimum = min(minimum, tmp);
+		}
 	}
+
+	cout << minimum << endl;
+
+	return 0;
 }
