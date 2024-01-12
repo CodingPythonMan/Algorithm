@@ -15,8 +15,8 @@ int main()
 	{
 		if (sen[i] == '+' || sen[i] == '-')
 		{
+			atoi(sen.substr(numCount, i - 1));
 			numCount = i;
-
 		}
 	}
 
