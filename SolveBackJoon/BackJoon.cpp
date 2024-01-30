@@ -1,35 +1,45 @@
 ﻿#include <iostream>
 #include <vector>
+#include <queue>
+
 using namespace std;
 
-int main() 
-{
-	string sen;
-	cin >> sen;
+int main() {
+	int N, K;
+	//int visit[100000] = { 0, };
+	cin >> N >> K;
+	queue<int> q;
+	int minsec[100001] = { 0, };
+	int nowN, sec = 0;
 
-	int answer = 0;
+	q.push(N);
+	while (!q.empty()) {
+		nowN = q.front();
+		q.pop();
 
-	// 50글자 이내
-	int numCount = 0;
-	int value;
-	bool minusFlag = false;
-	for (int i = 0; i < sen.length(); i++)
-	{
-		if (sen[i] != '+' && sen[i] != '-' && i != sen.length() - 1)
-			continue;
+		if (nowN < 0 || nowN>100000) continue;
+		if (nowN == K) 
+		{
+			cout << minsec[nowN];
+			break;
+		}
 
-		value = atoi(sen.substr(numCount, i - numCount + 1).c_str());
-		if (i != sen.length() - 1)
-			numCount = i + 1;
-			
-		if (minusFlag == false)
-			answer += value;
-		else
-			answer -= value;
-
-		if (sen[i] == '-')
-			minusFlag = true;
+		if (nowN - 1 >= 0 && minsec[nowN - 1] == 0) 
+		{
+			minsec[nowN - 1] = minsec[nowN] + 1;
+			q.push(nowN - 1);
+		}
+		if (nowN + 1 <= 100000 && minsec[nowN + 1] == 0) 
+		{
+			minsec[nowN + 1] = minsec[nowN] + 1;
+			q.push(nowN + 1);
+		}
+		if (2 * nowN <= 100000 && minsec[2 * nowN] == 0) 
+		{
+			minsec[2 * nowN] = minsec[nowN] + 1;
+			q.push(2 * nowN);
+		}
 	}
 
-	cout << answer << "\n";
+	return 0;
 }
