@@ -19,13 +19,4 @@ Heap Order 구현했으므로 Add 한 첫 부분부터 잘 배열된게 보임<b
 본래 인접 리스트로 풀었던 문제를 훨씬 더 빠르게 풀 수 있는 탐색 방법
 
 ## 백준
-solved_ac 기준으로 풀었습니다. <br>
-Class 01
-(2023-10-14) [단어의 개수](https://www.acmicpc.net/problem/1152)
-
-Class 02
-(2023-10-21) [영화감독 쇼](https://www.acmicpc.net/problem/1436)
-Class 02 중간까지 풀었다
-
-## Example
-- [LeetCode Network Delay](https://leetcode.com/problems/network-delay-time/)
+solved_ac 기준으로 풀었습니다.

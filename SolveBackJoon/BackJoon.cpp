@@ -1,45 +1,37 @@
 ﻿#include <iostream>
-#include <vector>
 #include <queue>
-
 using namespace std;
 
-int main() {
-	int N, K;
-	//int visit[100000] = { 0, };
-	cin >> N >> K;
-	queue<int> q;
-	int minsec[100001] = { 0, };
-	int nowN, sec = 0;
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
 
-	q.push(N);
-	while (!q.empty()) {
-		nowN = q.front();
-		q.pop();
+	int n;
+	cin >> n;
 
-		if (nowN < 0 || nowN>100000) continue;
-		if (nowN == K) 
-		{
-			cout << minsec[nowN];
-			break;
-		}
+	int num;
+	priority_queue<int, vector<int>, greater<int>> Queue;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> num;
 
-		if (nowN - 1 >= 0 && minsec[nowN - 1] == 0) 
+		if (num == 0)
 		{
-			minsec[nowN - 1] = minsec[nowN] + 1;
-			q.push(nowN - 1);
+			if (Queue.empty() == true)
+			{
+				cout << 0 << "\n";
+				continue;
+			}
+
+			num = Queue.top();
+			Queue.pop();
+			cout << num << "\n";
 		}
-		if (nowN + 1 <= 100000 && minsec[nowN + 1] == 0) 
+		else
 		{
-			minsec[nowN + 1] = minsec[nowN] + 1;
-			q.push(nowN + 1);
-		}
-		if (2 * nowN <= 100000 && minsec[2 * nowN] == 0) 
-		{
-			minsec[2 * nowN] = minsec[nowN] + 1;
-			q.push(2 * nowN);
+			Queue.push(num);
 		}
 	}
-
-	return 0;
 }
